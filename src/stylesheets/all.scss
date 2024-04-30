@@ -1,0 +1,7 @@
+@import "bootstrap/scss/functions"; // 步驟一
+
+@import "./variables"; // Custom variables 步驟三     
+
+@import "bootstrap/scss/bootstrap"; // 步驟二
+
+// @import "./utilities"; // Custom utilities 步驟四
