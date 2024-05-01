@@ -25,7 +25,6 @@ function Login() {
     try {
       const res = await axios.post(`/v2/admin/signin`, data);
       const { token, expired } = res.data;
-      console.log(token, expired);
       // 將 token 儲存在 cookie
       document.cookie = `reactAccessToken=${token}; expires=${new Date(expired)};`;
       // 導向到 /admin/products
