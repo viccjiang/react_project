@@ -33,6 +33,7 @@ function Login() {
         navigate("/admin/products");
       }
     } catch (error) {
+      // catch error 把錯誤訊息捕捉
       setLoginState(error.response.data)
     }
   }

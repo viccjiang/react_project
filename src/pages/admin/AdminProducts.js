@@ -3,15 +3,6 @@ import axios from "axios";
 
 function AdminProducts() {
   useEffect(() => {
-    // 取得 cookie 中的 reactAccessToken
-    const token = document.cookie
-      .split('; ')
-      .find((row) => row.startsWith('reactAccessToken='))
-      ?.split('=')[1];
-
-    // 每次發出請求都會把 token 放在 header 裡面
-    axios.defaults.headers.common['Authorization'] = token;
-
     (async () => {
       const productRes = await axios.get(`/v2/api/${process.env.REACT_APP_API_PATH}/admin/products/all`);
       console.log(productRes);
