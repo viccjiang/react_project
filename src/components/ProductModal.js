@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import axios from 'axios';
 
-function ProductModal({ closeProductModal }) {
+function ProductModal({ closeProductModal, getProducts }) {
 
+  // 建立資料狀態
   const [tempData, setTempData] = useState({
+    // 預設值
     title: "",
     category: "",
-    origin_price: 100,
-    price: 300,
+    origin_price: 0,
+    price: 0,
     unit: "",
     description: "",
     content: "",
@@ -15,35 +17,48 @@ function ProductModal({ closeProductModal }) {
     imageUrl: "",
   });
 
+  // 寫入值時觸發
   const handleChange = (e) => {
 
+    // name input 欄位 title -> 對應到 api title 屬性
+    // value 欄位輸入的值
     const { name, value } = e.target;
 
-    if(['price', 'origin_price'].includes(name)) {
+    // 處理 input 的 value 型別問題
+    // 把價格取出來轉成數字
+    // 查詢的 name 屬性是否包含在陣列中，使用陣列的 includes 方法
+
+    if (['price', 'origin_price'].includes(name)) {
       setTempData({
         ...tempData,
         [name]: Number(value),
       });
-    }else if(name === 'is_enabled') {
+    } else if (name === 'is_enabled') {
+      // 是否啟用要取得 checkbox 的值，並且轉型
       setTempData({
         ...tempData,
-        [name]: +e.target.checked , // 轉型
+        [name]: +e.target.checked, // 將布林 false 或 true 轉型數字 0 或 1
       });
-    }else{
+    } else {
       setTempData({
-        ...tempData,
-        [name]: value,
+        ...tempData, // 原始值
+        [name]: value, // 欄位名稱 : 欄位輸入的值
       });
     }
   }
 
-
-  const submit = async() => {
+  // 儲存按鈕 post 資料
+  const submit = async () => {
     try {
       const res = await axios.post(`/v2/api/${process.env.REACT_APP_API_PATH}/admin/product`, {
-        data : tempData
+        data: tempData // 依照 api 格式送出，所以包在 data 裡面
       });
-      console.log(res);      
+      console.log(res);
+      // 送出submit後，執行以下
+      // 關閉彈窗
+      closeProductModal();
+      // 關閉彈窗後執行，此函式為由外面 props 傳進來的函式，取得所有產品資料
+      getProducts();
     } catch (error) {
       console.log(error);
     }
@@ -52,8 +67,8 @@ function ProductModal({ closeProductModal }) {
   return (
     <div
       className='modal fade'
-      id="productModal"
       tabIndex='-1'
+      id="productModal"
       aria-labelledby='exampleModalLabel'
       aria-hidden='true'
     >
@@ -98,7 +113,7 @@ function ProductModal({ closeProductModal }) {
                 <img src="" alt='' className='img-fluid' />
               </div>
               <div className='col-sm-8'>
-                <pre>{JSON.stringify(tempData)}</pre>
+                {/* <pre>{JSON.stringify(tempData)}</pre> */}
                 <div className='form-group mb-2'>
                   <label className='w-100' htmlFor='title'>
                     標題

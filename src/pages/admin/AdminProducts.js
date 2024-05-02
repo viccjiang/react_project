@@ -7,21 +7,29 @@ function AdminProducts() {
   const [products, setProducts] = useState([]);
   const [pagination, setPagination] = useState({});
 
-  const productModal =useRef(null);
+  const productModal = useRef(null);
 
+  // 進入頁面中會先觸發 useEffect (生命週期)
   useEffect(() => {
+    // 這裡的 productModal 已經使用 useRef 綁定元素，初始化 Modal
     productModal.current = new Modal('#productModal', {
-      backdrop : 'static'
+      backdrop: 'static' // 點擊背景不會關閉
     });
-
-    (async () => {
-      // 須注意這支 products api 才有分頁資訊，all api 沒有分頁資訊
-      const productRes = await axios.get(`/v2/api/${process.env.REACT_APP_API_PATH}/admin/products`);
-      console.log(productRes);
-      setProducts(productRes.data.products);
-      setPagination(productRes.data.pagination);
-    })();
+    // 取得所有產品資料
+    getProducts();
   }, [])
+
+  // 取得所有產品資料
+  const getProducts = async () => {
+    // 取得遠端資料
+
+    // 須注意這支 products api 才有分頁資訊，all api 沒有分頁資訊
+    const productRes = await axios.get(`/v2/api/${process.env.REACT_APP_API_PATH}/admin/products`);
+    console.log(productRes);
+    
+    setProducts(productRes.data.products);
+    setPagination(productRes.data.pagination);
+  }
 
   const openProductModal = () => {
     productModal.current.show();
@@ -33,7 +41,13 @@ function AdminProducts() {
 
   return (
     <div className="p-3">
-      <ProductModal closeProductModal={closeProductModal} />
+
+      {/* 產品彈窗元件 */}
+      <ProductModal
+        closeProductModal={closeProductModal}
+        getProducts={getProducts} 
+      />
+
       <h3>產品列表</h3>
       <hr />
       <div className="text-end">
