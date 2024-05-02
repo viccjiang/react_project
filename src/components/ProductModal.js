@@ -68,13 +68,13 @@ function ProductModal({ closeProductModal, getProducts, type, tempProduct }) {
   // 儲存按鈕 post 資料
   const submit = async () => {
     try {
-      
+
       // 新增
       let api = `/v2/api/${process.env.REACT_APP_API_PATH}/admin/product`;
       let method = 'post';
-      
+
       // 編輯
-      if(type === 'edit') {
+      if (type === 'edit') {
         api = `/v2/api/${process.env.REACT_APP_API_PATH}/admin/product/${tempProduct.id}`;
         method = 'put';
       }
@@ -91,6 +91,28 @@ function ProductModal({ closeProductModal, getProducts, type, tempProduct }) {
       closeProductModal();
       // 關閉彈窗後執行，此函式為由外面 props 傳進來的函式，取得所有產品資料
       getProducts();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // 上傳圖片/檔案
+  const uploadFile = async (file) => {
+    console.log(file);
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append('file-to-upload', file);
+
+    try {
+      const res = await axios.post(`/v2/api/${process.env.REACT_APP_API_PATH}/admin/upload`, formData);
+      console.log(res);
+      if (res.data.success) {
+        setTempData({
+          ...tempData,
+          imageUrl: res.data.imageUrl,
+        });
+      }
     } catch (error) {
       console.log(error);
     }
@@ -134,6 +156,14 @@ function ProductModal({ closeProductModal, getProducts, type, tempProduct }) {
                     />
                   </label>
                 </div>
+
+                {/* 原本 list 資料的圖片 */}
+                {tempProduct.imagesUrl && (
+                  tempProduct.imagesUrl.map((image, index) => (
+                    <img key={index} src={image} alt='' className='img-fluid' />
+                  )
+                ))}
+
                 <div className='form-group mb-2'>
                   <label className='w-100' htmlFor='customFile'>
                     或 上傳圖片
@@ -141,10 +171,14 @@ function ProductModal({ closeProductModal, getProducts, type, tempProduct }) {
                       type='file'
                       id='customFile'
                       className='form-control'
+                      onChange={(e) => { uploadFile(e.target.files[0]) }}
                     />
                   </label>
                 </div>
-                <img src="" alt='' className='img-fluid' />
+                {/* 圖片預覽 */}
+                {tempData.imageUrl && (
+                  <img src={tempData.imageUrl} alt='' className='img-fluid' />
+                )}
               </div>
               <div className='col-sm-8'>
                 {/* <pre>{JSON.stringify(tempData)}</pre> */}
