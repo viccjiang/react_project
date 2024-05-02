@@ -7,6 +7,13 @@ function AdminProducts() {
   const [products, setProducts] = useState([]);
   const [pagination, setPagination] = useState({});
 
+  // type: 決定 modal 展開的用途，是新增還是編輯 
+  const [type, setType] = useState('create'); // create, edit
+
+  // 點選編輯時要把當前商品傳入，所以使用 tempProduct 來暫存產品資料
+  const [tempProduct, setTempProduct] = useState({})
+
+  // 使用 useRef 綁定元素
   const productModal = useRef(null);
 
   // 進入頁面中會先觸發 useEffect (生命週期)
@@ -26,12 +33,17 @@ function AdminProducts() {
     // 須注意這支 products api 才有分頁資訊，all api 沒有分頁資訊
     const productRes = await axios.get(`/v2/api/${process.env.REACT_APP_API_PATH}/admin/products`);
     console.log(productRes);
-    
+
     setProducts(productRes.data.products);
     setPagination(productRes.data.pagination);
   }
 
-  const openProductModal = () => {
+  // 開啟產品彈窗
+  const openProductModal = (type, product) => {
+    // 開啟彈窗時，設定 type 和 tempProduct
+    // 這兩個資料需要透過 props 傳入 ProductModal
+    setType(type);
+    setTempProduct(product);
     productModal.current.show();
   }
 
@@ -46,6 +58,8 @@ function AdminProducts() {
       <ProductModal
         closeProductModal={closeProductModal}
         getProducts={getProducts} 
+        tempProduct={tempProduct}
+        type={type}
       />
 
       <h3>產品列表</h3>
@@ -54,7 +68,7 @@ function AdminProducts() {
         <button
           type="button"
           className="btn btn-primary btn-sm"
-          onClick={openProductModal}
+          onClick={() => openProductModal('create', {})}
         >
           建立新商品
         </button>
@@ -82,6 +96,7 @@ function AdminProducts() {
                     <button
                       type="button"
                       className="btn btn-primary btn-sm"
+                      onClick={() => openProductModal('edit', product)}
                     >
                       編輯
                     </button>
