@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import ProductModal from "../../components/ProductModal";
+import DeleteModal from "../../components/DeleteModal";
 import { Modal } from "bootstrap";
 
 function AdminProducts() {
@@ -15,13 +16,20 @@ function AdminProducts() {
 
   // 使用 useRef 綁定元素
   const productModal = useRef(null);
+  const deleteModal = useRef(null);
 
   // 進入頁面中會先觸發 useEffect (生命週期)
   useEffect(() => {
+
     // 這裡的 productModal 已經使用 useRef 綁定元素，初始化 Modal
     productModal.current = new Modal('#productModal', {
       backdrop: 'static' // 點擊背景不會關閉
     });
+
+    deleteModal.current = new Modal('#deleteModal', {
+      backdrop: 'static'
+    });
+
     // 取得所有產品資料
     getProducts();
   }, [])
@@ -51,15 +59,48 @@ function AdminProducts() {
     productModal.current.hide();
   }
 
+  // 開啟產品彈窗
+  const openDeleteModal = (product) => {
+    // 開啟彈窗時，設定  tempProduct
+    // 這兩個資料需要透過 props 傳入 ProductModal
+    setTempProduct(product);
+    deleteModal.current.show();
+  }
+
+  const closeDeleteModal = () => {
+    deleteModal.current.hide();
+  }
+
+  // 刪除放外層，可以共用
+  const deleteProduct = async (id) => {
+    try {
+      const res = await axios.delete(`/v2/api/${process.env.REACT_APP_API_PATH}/admin/product/${id}`);
+      if (res.data.success) {
+        getProducts();
+        closeDeleteModal();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <div className="p-3">
 
       {/* 產品彈窗元件 */}
       <ProductModal
         closeProductModal={closeProductModal}
-        getProducts={getProducts} 
+        getProducts={getProducts}
         tempProduct={tempProduct}
         type={type}
+      />
+
+      {/* 刪除彈窗元件 */}
+      <DeleteModal
+        close={closeDeleteModal}
+        text={tempProduct.title}
+        handleDelete={deleteProduct}
+        id={tempProduct.id}
       />
 
       <h3>產品列表</h3>
@@ -103,6 +144,7 @@ function AdminProducts() {
                     <button
                       type="button"
                       className="btn btn-outline-danger btn-sm ms-2"
+                      onClick={() => openDeleteModal(product)}
                     >
                       刪除
                     </button>
