@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-function ProductModal({ closeModal, getCoupons, type, tempCoupon }) {
+function CouponModal({ closeModal, getCoupons, type, tempCoupon }) {
 
   // 建立資料狀態
   const [tempData, setTempData] = useState({
@@ -13,6 +13,10 @@ function ProductModal({ closeModal, getCoupons, type, tempCoupon }) {
     code: "testCode"
   });
 
+
+  // 建立時間格式
+  const [date, setDate] = useState(new Date());
+
   useEffect(() => {
     if (type === 'create') {
       setTempData({
@@ -21,9 +25,11 @@ function ProductModal({ closeModal, getCoupons, type, tempCoupon }) {
         percent: 80,
         due_date: 1555459200,
         code: "testCode"
-      })
+      });
+      setDate(new Date());
     } else if (type === 'edit') {
-      setTempData(tempCoupon)
+      setTempData(tempCoupon);
+      setDate(new Date(tempCoupon.due_date));
     }
   }, [type, tempCoupon])
 
@@ -74,7 +80,10 @@ function ProductModal({ closeModal, getCoupons, type, tempCoupon }) {
       const res = await axios[method](
         api,
         {
-          data: tempData // 依照 api 格式送出，所以包在 data 裡面
+          data: {
+            ...tempData,
+            due_date: date.getTime(),
+          } // 依照 api 格式送出，所以包在 data 裡面
         }
       );
       console.log(res);
@@ -172,6 +181,17 @@ function ProductModal({ closeModal, getCoupons, type, tempCoupon }) {
                     name='due_date'
                     placeholder='請輸入到期日'
                     className='form-control mt-1'
+                    value={`${date.getFullYear().toString()}-${(
+                      date.getMonth() + 1
+                    )
+                      .toString()
+                      .padStart(2, 0)}-${date
+                      .getDate()
+                      .toString()
+                      .padStart(2, 0)}`}
+                    onChange={(e) => {
+                      setDate(new Date(e.target.value));
+                    }}
                   />
                 </label>
               </div>
@@ -196,7 +216,7 @@ function ProductModal({ closeModal, getCoupons, type, tempCoupon }) {
                 type='checkbox'
                 id='is_enabled'
                 name='is_enabled'
-                value={tempData.is_enabled}
+                checked={!!tempData.is_enabled} // !! 轉型 轉為布林值
                 onChange={handleChange}
               />
               是否啟用
@@ -216,4 +236,4 @@ function ProductModal({ closeModal, getCoupons, type, tempCoupon }) {
   );
 }
 
-export default ProductModal;
+export default CouponModal;
