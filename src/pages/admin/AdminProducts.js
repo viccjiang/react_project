@@ -3,6 +3,7 @@ import axios from "axios";
 import ProductModal from "../../components/ProductModal";
 import DeleteModal from "../../components/DeleteModal";
 import { Modal } from "bootstrap";
+import Pagination from "../../components/Pagination";
 
 function AdminProducts() {
   const [products, setProducts] = useState([]);
@@ -34,12 +35,12 @@ function AdminProducts() {
     getProducts();
   }, [])
 
-  // 取得所有產品資料
-  const getProducts = async () => {
+  // 取得所有產品資料，預設 page 第一頁
+  const getProducts = async (page = 1) => {
     // 取得遠端資料
 
     // 須注意這支 products api 才有分頁資訊，all api 沒有分頁資訊
-    const productRes = await axios.get(`/v2/api/${process.env.REACT_APP_API_PATH}/admin/products`);
+    const productRes = await axios.get(`/v2/api/${process.env.REACT_APP_API_PATH}/admin/products?page=${page}`);
     console.log(productRes);
 
     setProducts(productRes.data.products);
@@ -157,34 +158,12 @@ function AdminProducts() {
         </tbody>
       </table>
 
-      <nav aria-label="Page navigation example">
-        <ul className="pagination">
-          <li className="page-item">
-            <a className="page-link disabled" href="/" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
-          {
-            [...new Array(5)].map((_, i) => (
-              // eslint-disable-next-line react/no-array-index-key
-              <li className="page-item" key={`${i}_page`}>
-                <a
-                  className={`page-link ${(i + 1 === 1) && 'active'}`}
-                  href="/"
-                >
-                  {i + 1}
-                </a>
+      {/* 分頁元件 */}
+      <Pagination
+        pagination={pagination}
+        changePage={getProducts}
+      />
 
-              </li>
-            ))
-          }
-          <li className="page-item">
-            <a className="page-link" href="/" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
     </div>
   );
 }
