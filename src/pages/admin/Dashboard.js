@@ -1,10 +1,17 @@
 import { Outlet, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useReducer } from "react";
 import Message from "../../components/Message";
+import {
+  MessageContext,
+  messageReducer,
+  initState,
+} from "../../store/messageStore";
 
 function Dashboard() {
   const navigate = useNavigate();
+
+  const reducer = useReducer(messageReducer, initState);
 
   // 登出功能
   const logout = () => {
@@ -41,7 +48,7 @@ function Dashboard() {
   }, [navigate, token]);
 
   return (
-    <>
+    <MessageContext.Provider value={reducer}>
       <Message />
       <nav className="navbar navbar-expand-lg bg-dark">
         <div className="container-fluid">
@@ -107,7 +114,7 @@ function Dashboard() {
           {/* Products end */}
         </div>
       </div>
-    </>
+    </MessageContext.Provider>
   );
 }
 
