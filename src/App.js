@@ -9,16 +9,21 @@ import AdminOrders from "./pages/admin/AdminOrders";
 import FrontLayout from "./pages/front/FrontLayout";
 import Home from "./pages/front/Home";
 import Products from "./pages/front/Products";
+import ProductDetail from "./pages/front/ProductDetail";
 
 function App() {
   return (
     <div className="App">
       <Routes>
+        {/* 前台 */}
         <Route path="/" element={<FrontLayout />}>
           <Route path="" element={<Home />}></Route>
           <Route path="products" element={<Products />}></Route>
+          <Route path="product/:id" element={<ProductDetail />}></Route>
         </Route>
+        {/* 登入 */}
         <Route path="/login" element={<Login />}></Route>
+        {/* 後台 */}
         <Route path="/admin" element={<Dashboard />}>
           <Route path="products" element={<AdminProducts />}></Route>
           <Route path="coupons" element={<AdminCoupons />}></Route>
