@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useOutletContext, useParams } from "react-router-dom";
 
 function ProductDetail() {
   const [product, setProduct] = useState({}); // 單一產品資料
   const [cartQuantity, setCartQuantity] = useState(1); // 購物車數量
   const [isLoading, setIsLoading] = useState(false); // 是否載入中
+  const { getCart } = useOutletContext(); // 取得 getCart 方法
 
   // 取得路由參數 id ，id 會帶在路由參數
   const { id } = useParams();
@@ -33,6 +34,7 @@ function ProductDetail() {
         data
       );
       console.log(res);
+      getCart();
       setIsLoading(false);
     } catch (error) {
       console.log(error);
