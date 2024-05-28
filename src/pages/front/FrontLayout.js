@@ -28,7 +28,7 @@ function FrontLayout() {
       {/* header */}
       <Navbar cartData={cartData}></Navbar>
       {/* 巢狀 */}
-      <Outlet context={{ getCart }}></Outlet>
+      <Outlet context={{ getCart, cartData }}></Outlet>
       {/* footer */}
       <div className="bg-dark">
         <div className="container">
