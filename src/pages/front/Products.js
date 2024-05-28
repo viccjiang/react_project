@@ -1,14 +1,17 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
-import Pagination from "../../components/Pagination";
+import axios from "axios";
 import { Link } from "react-router-dom";
+import Pagination from "../../components/Pagination";
+import Loading from "../../components/Loading";
 
 function Products() {
   const [products, setProducts] = useState([]);
   const [pagination, setPagination] = useState({});
+  const [isLoading, setLoading] = useState(false);
 
   // 取得所有產品資料，預設 page 第一頁
   const getProducts = async (page = 1) => {
+    setLoading(true);
     // 取得遠端資料
 
     // 須注意這支 products api 才有分頁資訊，all api 沒有分頁資訊
@@ -19,6 +22,7 @@ function Products() {
 
     setProducts(productRes.data.products);
     setPagination(productRes.data.pagination);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -28,6 +32,7 @@ function Products() {
   return (
     <>
       <div className="container mt-md-5 mt-3 mb-7">
+        <Loading isLoading={isLoading} />
         <div className="row">
           {/* 產品列表 */}
           {products.map((product) => {
