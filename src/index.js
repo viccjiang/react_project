@@ -12,6 +12,7 @@ import reportWebVitals from "./reportWebVitals";
 // gh-pages 專案上線時 HashRouter
 import { HashRouter } from "react-router-dom";
 
+// axios 預設設定，發請求時不用再寫完整的 url
 import axios from "axios";
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 

@@ -31,14 +31,14 @@ function Products() {
 
   return (
     <>
-      <div className="container mt-md-5 mt-3 mb-7">
+      <div className="container mt-md-5 mt-3 mb-7 full-height">
         <Loading isLoading={isLoading} />
         <div className="row">
           {/* 產品列表 */}
           {products.map((product) => {
             return (
               <div className="col-sm-6 col-md-4 col-lg-3" key={product.id}>
-                <div className="card border-0 mb-4 position-relative position-relative">
+                <div className="card border-0 mb-4 position-relative">
                   <img
                     src={product.imageUrl}
                     className="card-img-top rounded-0 object-cover"
@@ -48,7 +48,12 @@ function Products() {
                   <div className="card-body p-0">
                     <h4 className="mb-0 mt-3">
                       {/* 詳情頁 */}
-                      <Link to={`/product/${product.id}`}>{product.title}</Link>
+                      <Link
+                        to={`/product/${product.id}`}
+                        className="custom-link text-primary"
+                      >
+                        {product.title}
+                      </Link>
                     </h4>
                     <p className="text-muted mt-3">${product.price}</p>
                   </div>

@@ -1,125 +1,84 @@
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
+
 function Home() {
+  const [products, setProducts] = useState([]);
+
+  const getProducts = async () => {
+    const productRes = await axios.get(
+      `/v2/api/${process.env.REACT_APP_API_PATH}/products/?category=炸物`
+    );
+    console.log(productRes);
+    setProducts(productRes.data.products);
+  };
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
   return (
     <>
       <div className="container">
         <div className="row flex-md-row-reverse flex-column">
-          <div className="col-md-6">
+          <div className="col-md-8">
             <img
-              src="https://images.unsplash.com/photo-1526038335545-4b96864eaee7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1867&q=80
-          alt="
-              className="img-fluid"
+              src="https://images.unsplash.com/photo-1550345332-09e3ac987658?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              width="100%"
+              className="object-cover"
+              height={400}
               alt="..."
             />
           </div>
-          <div className="col-md-6 d-flex flex-column justify-content-center mt-md-0 mt-3">
-            <h2 className="fw-bold">Lorem ipsum dolor sit</h2>
+          <div className="col-md-4 d-flex flex-column justify-content-center mt-md-0 mt-3">
+            <h2 className="fw-bold">讓妳綻放健康之美！</h2>
             <h5 className="font-weight-normal text-muted mt-2">
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-              nonumy eirmod tempor
+              加入我們，開啟自信新篇章
             </h5>
+            <ul>
+              <li>💪 專屬女性的健身空間</li>
+              <li>🧘‍♀️ 個性化訓練計劃</li>
+              <li>🤗 友善社群，支持妳每一步</li>
+            </ul>
             <div className="input-group mb-0 mt-4">
-              <input
-                type="text"
-                className="form-control rounded-0"
-                placeholder=""
-              />
               <div className="input-group-append">
-                <button
-                  className="btn btn-dark rounded-0"
-                  type="button"
-                  id="search"
-                >
-                  Lorem ipsum
-                </button>
+                <Link to={"/products"}>
+                  <button
+                    className="btn btn-dark rounded-0"
+                    type="button"
+                    id="search"
+                  >
+                    立即加入
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
         </div>
         <div className="row mt-5">
-          <div className="col-md-6 mt-md-4">
-            <div className="card border-0 mb-4 position-relative position-relative">
-              <img
-                src="https://images.unsplash.com/photo-1502743780242-f10d2ce370f3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1916&q=80"
-                className="card-img-top rounded-0"
-                alt="..."
-              />
-              <div className="card-body p-0">
-                <h4 className="mb-0 mt-4">Lorem ipsum</h4>
-                <div className="d-flex justify-content-between mt-3">
-                  <p className="card-text text-muted mb-0 w-75">
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                    diam nonumy eirmod.
-                  </p>
-                  <button className="btn btn-outline-dark rounded-0 text-nowrap">
-                    Lorem ipsum
-                  </button>
+          {products?.map((product) => {
+            return (
+              <div className="col-md-6 mt-md-4" key={product.id}>
+                <div className="card border-0 mb-4 position-relative position-relative">
+                  <img
+                    src={product.imageUrl}
+                    className="card-img-top rounded-0 object-cover"
+                    alt="..."
+                    height={300}
+                  />
+                  <div className="card-body p-0">
+                    <h4 className="mb-0 mt-2">{product.title}</h4>
+                    <Link
+                      to={`/product/${product.id}`}
+                      className="btn btn-outline-dark rounded-0 text-nowrap mt-2"
+                    >
+                      查看料理
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div className="col-md-6 mt-md-4">
-            <div className="card border-0 mb-4 position-relative position-relative">
-              <img
-                src="https://images.unsplash.com/photo-1502743780242-f10d2ce370f3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1916&q=80"
-                className="card-img-top rounded-0"
-                alt="..."
-              />
-              <div className="card-body p-0">
-                <h4 className="mb-0 mt-4">Lorem ipsum</h4>
-                <div className="d-flex justify-content-between mt-3">
-                  <p className="card-text text-muted mb-0 w-75">
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                    diam nonumy eirmod.
-                  </p>
-                  <button className="btn btn-outline-dark rounded-0 text-nowrap">
-                    Lorem ipsum
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-6 mt-md-4">
-            <div className="card border-0 mb-4 position-relative position-relative">
-              <img
-                src="https://images.unsplash.com/photo-1502743780242-f10d2ce370f3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1916&q=80"
-                className="card-img-top rounded-0"
-                alt="..."
-              />
-              <div className="card-body p-0">
-                <h4 className="mb-0 mt-4">Lorem ipsum</h4>
-                <div className="d-flex justify-content-between mt-3">
-                  <p className="card-text text-muted mb-0 w-75">
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                    diam nonumy eirmod.
-                  </p>
-                  <button className="btn btn-outline-dark rounded-0 text-nowrap">
-                    Lorem ipsum
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-6 mt-md-4">
-            <div className="card border-0 mb-4 position-relative position-relative">
-              <img
-                src="https://images.unsplash.com/photo-1502743780242-f10d2ce370f3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1916&q=80"
-                className="card-img-top rounded-0"
-                alt="..."
-              />
-              <div className="card-body p-0">
-                <h4 className="mb-0 mt-4">Lorem ipsum</h4>
-                <div className="d-flex justify-content-between mt-3">
-                  <p className="card-text text-muted mb-0 w-75">
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                    diam nonumy eirmod.
-                  </p>
-                  <button className="btn btn-outline-dark rounded-0 text-nowrap">
-                    Lorem ipsum
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+            );
+          })}
         </div>
       </div>
       <div className="bg-light mt-7">

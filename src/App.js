@@ -16,7 +16,8 @@ import Success from "./pages/front/Success";
 
 function App() {
   return (
-    <div className="App">
+    // dark mode
+    <div className="App bg-dark">
       <Routes>
         {/* 前台 */}
         <Route path="/" element={<FrontLayout />}>
