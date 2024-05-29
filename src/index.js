@@ -9,6 +9,8 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
+import "swiper/css";
+
 // gh-pages 專案上線時 HashRouter
 import { HashRouter } from "react-router-dom";
 

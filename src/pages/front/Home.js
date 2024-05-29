@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+
 function Home() {
   const [products, setProducts] = useState([]);
 
@@ -19,6 +21,29 @@ function Home() {
 
   return (
     <>
+      <Swiper className="mySwiper bg-light vh-100">
+        <SwiperSlide>
+          <img
+            src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            className="object-cover w-100 vh-100"
+            alt="..."
+          />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img
+            src="https://images.unsplash.com/photo-1554284126-aa88f22d8b74?q=80&w=1988&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            className="object-cover w-100 vh-100"
+            alt="..."
+          />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img
+            src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            className="object-cover w-100 vh-100"
+            alt="..."
+          />
+        </SwiperSlide>
+      </Swiper>
       <div className="container">
         <div className="row flex-md-row-reverse flex-column">
           <div className="col-md-8">
@@ -30,7 +55,7 @@ function Home() {
               alt="..."
             />
           </div>
-          <div className="col-md-4 d-flex flex-column justify-content-center mt-md-0 mt-3">
+          <div className="col-md-4 d-flex flex-column justify-content-center mt-md-0 mt-3 text-light">
             <h2 className="fw-bold">讓妳綻放健康之美！</h2>
             <h5 className="font-weight-normal text-muted mt-2">
               加入我們，開啟自信新篇章
@@ -44,7 +69,7 @@ function Home() {
               <div className="input-group-append">
                 <Link to={"/products"}>
                   <button
-                    className="btn btn-dark rounded-0"
+                    className="btn btn-light rounded-0"
                     type="button"
                     id="search"
                   >
