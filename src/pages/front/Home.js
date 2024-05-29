@@ -25,18 +25,23 @@ function Home() {
   return (
     <>
       <Swiper
-        className="mySwiper"
+        className="mySwiper vh-90 position-relative"
         pagination={{
           dynamicBullets: true,
         }}
         modules={[Pagination]}
       >
+        <p className="text-light position-absolute top-50 top-50 start-50 translate-middle z-2000">
+          FIT her - 讓妳綻放健康之美！
+        </p>
         <SwiperSlide>
-          <img
-            src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            className="object-cover w-100 vh-100"
-            alt="..."
-          />
+          <div>
+            <img
+              src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              className="object-cover w-100 vh-100"
+              alt="..."
+            />
+          </div>
         </SwiperSlide>
         <SwiperSlide>
           <img
