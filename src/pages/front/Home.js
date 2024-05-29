@@ -3,6 +3,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper/modules";
+
+import "swiper/css/pagination";
 
 function Home() {
   const [products, setProducts] = useState([]);
@@ -21,7 +24,13 @@ function Home() {
 
   return (
     <>
-      <Swiper className="mySwiper bg-light vh-100">
+      <Swiper
+        className="mySwiper"
+        pagination={{
+          dynamicBullets: true,
+        }}
+        modules={[Pagination]}
+      >
         <SwiperSlide>
           <img
             src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -44,7 +53,8 @@ function Home() {
           />
         </SwiperSlide>
       </Swiper>
-      <div className="container">
+
+      <div className="container mt-7">
         <div className="row flex-md-row-reverse flex-column">
           <div className="col-md-8">
             <img
@@ -80,7 +90,7 @@ function Home() {
             </div>
           </div>
         </div>
-        <div className="row mt-5">
+        <div className="row">
           {products?.map((product) => {
             return (
               <div className="col-md-6 mt-md-4" key={product.id}>
