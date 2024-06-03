@@ -13,7 +13,7 @@ function Dashboard() {
 
   const reducer = useReducer(messageReducer, initState);
 
-  // 登出功能
+  // 登出功能，清除 cookie 裡面的 token
   const logout = () => {
     // 清除 cookie 裡面存的 token
     document.cookie = "reactAccessToken=";
@@ -32,11 +32,13 @@ function Dashboard() {
 
   useEffect(() => {
     if (!token) {
+      // 如果沒有 token 導向到 /login
       return navigate("/login");
     }
 
     (async () => {
       try {
+        // 檢查 token 是否有效
         await axios.post("/v2/api/user/check");
       } catch (error) {
         // 如果沒有錯誤訊息 success 為 false 時，導向到 /login
@@ -50,9 +52,13 @@ function Dashboard() {
   return (
     <MessageContext.Provider value={reducer}>
       <Message />
-      <nav className="navbar navbar-expand-lg bg-dark">
+      {/* 表頭 */}
+      <nav
+        className="navbar navbar-expand-lg bg-primary"
+        style={{ "--bs-bg-opacity": ".8" }}
+      >
         <div className="container-fluid">
-          <p className="text-white mb-0">HEX EATS 後台管理系統</p>
+          <p className="text-white mb-0"> FIT her. 後台管理系統</p>
           <button
             className="navbar-toggler"
             type="button"
@@ -82,6 +88,7 @@ function Dashboard() {
           </div>
         </div>
       </nav>
+      {/* 側邊欄 */}
       <div className="d-flex" style={{ minHeight: "calc(100vh - 56px)" }}>
         <div className="bg-light" style={{ width: "200px" }}>
           <ul className="list-group list-group-flush">
@@ -108,11 +115,9 @@ function Dashboard() {
             </NavLink>
           </ul>
         </div>
-        <div className="w-100">
-          {/* Products 槽狀路由，有 token 才會渲染子路由*/}
-          {token && <Outlet />}
-          {/* Products end */}
-        </div>
+
+        {/* 巢狀路由，有 token 才會渲染子路由*/}
+        <div className="w-100">{token && <Outlet />}</div>
       </div>
     </MessageContext.Provider>
   );

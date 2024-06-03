@@ -21,27 +21,12 @@ function AdminProducts() {
   // 點選編輯時要把當前商品傳入，所以使用 tempProduct 來暫存產品資料
   const [tempProduct, setTempProduct] = useState({});
 
-  // 使用 useRef 綁定元素
+  // 使用 useRef 綁定元素 modal
   const productModal = useRef(null);
   const deleteModal = useRef(null);
 
   // 使用 useContext 取得全域的 dispatch
   const [, dispatch] = useContext(MessageContext);
-
-  // 進入頁面中會先觸發 useEffect (生命週期)
-  useEffect(() => {
-    // 這裡的 productModal 已經使用 useRef 綁定元素，初始化 Modal
-    productModal.current = new Modal("#productModal", {
-      backdrop: "static", // 點擊背景不會關閉
-    });
-
-    deleteModal.current = new Modal("#deleteModal", {
-      backdrop: "static",
-    });
-
-    // 取得所有產品資料
-    getProducts();
-  }, []);
 
   // 取得所有產品資料，預設 page 第一頁
   const getProducts = async (page = 1) => {
@@ -98,6 +83,24 @@ function AdminProducts() {
       handleErrorMessage(dispatch, error);
     }
   };
+
+  // 進入頁面中會先觸發 useEffect (生命週期)
+  useEffect(() => {
+    // 新增產品 modal
+    // 這裡的 productModal 已經使用 useRef 綁定元素，初始化 Modal
+    productModal.current = new Modal("#productModal", {
+      backdrop: "static", // 點擊背景不會關閉
+    });
+
+    // 刪除產品 modal
+    // 這裡的 deleteModal 已經使用 useRef 綁定元素，初始化 Modal
+    deleteModal.current = new Modal("#deleteModal", {
+      backdrop: "static",
+    });
+
+    // 取得所有產品資料
+    getProducts();
+  }, []);
 
   return (
     <div className="p-3">

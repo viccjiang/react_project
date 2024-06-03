@@ -1,6 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-// import { useEffect } from "react";
-// import axios from "axios";
+
 import Login from "./pages/Login";
 import Dashboard from "./pages/admin/Dashboard";
 import AdminProducts from "./pages/admin/AdminProducts";
@@ -16,8 +15,7 @@ import Success from "./pages/front/Success";
 
 function App() {
   return (
-    // dark mode
-    <div className="App bg-dark">
+    <div className="App">
       <Routes>
         {/* 前台 */}
         <Route path="/" element={<FrontLayout />}>
@@ -33,6 +31,7 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         {/* 後台 */}
         <Route path="/admin" element={<Dashboard />}>
+          {/* 巢狀路由 outlet  */}
           <Route path="products" element={<AdminProducts />}></Route>
           <Route path="coupons" element={<AdminCoupons />}></Route>
           <Route path="orders" element={<AdminOrders />}></Route>
