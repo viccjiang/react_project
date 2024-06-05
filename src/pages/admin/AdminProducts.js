@@ -19,6 +19,7 @@ function AdminProducts() {
   const [type, setType] = useState("create"); // create, edit
 
   // 點選編輯時要把當前商品傳入，所以使用 tempProduct 來暫存產品資料
+  // 編輯時的資料是透過 tempProduct 來傳遞
   const [tempProduct, setTempProduct] = useState({});
 
   // 使用 useRef 綁定元素 modal
