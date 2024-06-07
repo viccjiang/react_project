@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 
 import { useOutletContext, useParams } from "react-router-dom";
 
@@ -134,10 +135,10 @@ function Home() {
             {products?.map((product) => {
               return (
                 <div className="col-md-4 mt-md-4" key={product.id}>
-                  <div className="card border-0 mb-4 position-relative position-relative rounded-0">
+                  <div className="card border-0 rounded-4 mb-4 position-relative position-relative rounded-0">
                     <img
                       src={product.imageUrl}
-                      className="card-img-top rounded-0 object-cover"
+                      className="card-img-top rounded-top-4 object-cover"
                       alt="..."
                       height={300}
                     />
@@ -169,7 +170,7 @@ function Home() {
       <div className="bg-light py-7">
         <div className="container">
           <div className="row justify-content-center">
-            <div className="col-md-4 text-center">
+            <div className="col text-center">
               <Bmi />
             </div>
           </div>
@@ -224,6 +225,99 @@ function Home() {
             </SwiperSlide>
           ))}
         </Swiper>
+      </div>
+      <div className="bg-black">
+        <div className="footer-rounded pt-8 pt-md-6 rounded-bottom-40 bg-white"></div>
+        <div className="container pt-1 pt-lg-4">
+          <div className="border-bottom border-gray-2 fw-medium">
+            <ul className="nav justify-content-center justify-content-lg-start pb-1 pb-lg-4">
+              <li className="py-3">
+                <Link
+                  to={"/"}
+                  className="fs-5 text-light d-inline-block  fs-md-7 ls-2 p-1 p-md-3 mx-1 mx-md-2 footer-hover-gradient-text"
+                >
+                  首頁
+                </Link>
+              </li>
+              <li className="py-3">
+                <Link
+                  to={"/products"}
+                  className="fs-5 text-light d-inline-block  fs-md-7 ls-2 p-1 p-md-3 mx-1 mx-md-2 footer-hover-gradient-text"
+                >
+                  購買課程
+                </Link>
+              </li>
+              <li className="py-3">
+                <Link
+                  href="/coaches"
+                  className="fs-5 text-light d-inline-block  fs-md-7 ls-2 p-1 p-md-3 mx-1 mx-md-2 footer-hover-gradient-text"
+                >
+                  課程教練
+                </Link>
+              </li>
+              <li className="py-3">
+                <Link
+                  to={"/about"}
+                  className="fs-5 text-light d-inline-block  fs-md-7 ls-2 p-1 p-md-3 mx-1 mx-md-2 footer-hover-gradient-text"
+                >
+                  關於我們
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <div className="d-flex flex-column flex-md-row align-items-center pt-4 pt-md-6 pb-1 pb-md-5">
+            <ul className="fs-8 fs-lg-7 ls-md-2 text-gray-3 list-unstyled text-center text-md-start py-1">
+              <li className="mb-2 text-light">
+                <span className="me-2">地址</span>
+                <span className="text-white">236台北市健身路999號</span>
+              </li>
+              <li>
+                <span className="me-2 text-light">電話</span>
+                <a
+                  href="tel:02-1234567"
+                  className="mb-0 text-light footer-hover-gradient-text"
+                  title="立即撥打"
+                >
+                  02-1234567
+                </a>
+              </li>
+            </ul>
+            <ul className="list-unstyled d-flex ms-md-auto">
+              <li className="mx-2">
+                <a
+                  href="https://www.facebook.com/"
+                  className="d-inline-block rounded-circle bg-gray-2"
+                >
+                  <span className="icon-base icon-fb bg-white m-2"></span>
+                </a>
+              </li>
+              <li className="mx-2">
+                <a
+                  href="https://www.youtube.com/"
+                  className="d-inline-block rounded-circle bg-gray-2"
+                >
+                  <span className="icon-base icon-yt bg-white m-2"></span>
+                </a>
+              </li>
+              <li className="mx-2">
+                <Link
+                  href="#"
+                  className="d-inline-block rounded-circle bg-gray-2"
+                >
+                  <span className="icon-base icon-ig bg-white m-2"></span>
+                </Link>
+              </li>
+              <li className="mx-2">
+                <Link
+                  href="#"
+                  className="d-inline-block rounded-circle bg-gray-2"
+                >
+                  <span className="icon-base icon-message bg-white m-2"></span>
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </>
   );

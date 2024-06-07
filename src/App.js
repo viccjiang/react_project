@@ -12,6 +12,7 @@ import ProductDetail from "./pages/front/ProductDetail";
 import Cart from "./pages/front/Cart";
 import Checkout from "./pages/front/Checkout";
 import Success from "./pages/front/Success";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -36,6 +37,8 @@ function App() {
           <Route path="coupons" element={<AdminCoupons />}></Route>
           <Route path="orders" element={<AdminOrders />}></Route>
         </Route>
+        {/* 404 */}
+        <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </div>
   );

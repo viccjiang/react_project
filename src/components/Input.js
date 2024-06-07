@@ -1,5 +1,6 @@
 export default function Inputs(props) {
-  const { id, hint, name, min, onChange, type, className, label } = props;
+  const { id, hint, name, min, onChange, type, className, label, value } =
+    props;
   return (
     <>
       <label htmlFor={id} label={label} className="d-flex ustify-content-start">
@@ -11,6 +12,7 @@ export default function Inputs(props) {
         min={min}
         placeholder={hint}
         onChange={onChange}
+        value={value}
         type={type}
         className={className}
       />

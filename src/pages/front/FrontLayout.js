@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import axios from "axios";
 
@@ -30,27 +31,20 @@ function FrontLayout() {
       {/* 巢狀 */}
       <Outlet context={{ getCart, cartData }}></Outlet>
       {/* footer */}
-      <div className="bg-black">
+      <div
+        className="bg-primary"
+        style={{
+          backgroundImage: "linear-gradient(120deg, #712cf9 , #ff99cc 100%)",
+        }}
+      >
         <div className="container">
           <div className="d-flex align-items-center justify-content-between text-white py-4">
-            <p className="mb-0">© 2020 LOGO All Rights Reserved.</p>
-            <ul className="d-flex list-unstyled mb-0 h4">
-              {/* <li>
-                <a href="#" className="text-white mx-3">
-                  <i className="fab fa-facebook"></i>
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-white mx-3">
-                  <i className="fab fa-instagram"></i>
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-white ms-3">
-                  <i className="fab fa-line"></i>
-                </a>
-              </li> */}
-            </ul>
+            <p className="mb-0">
+              © 2020 LOGO All Rights Reserved. | 僅個人學習，無任何商業用途
+            </p>
+            <NavLink className="logo navbar-brand fs-1" to="/">
+              FIT her.
+            </NavLink>
           </div>
         </div>
       </div>
