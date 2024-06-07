@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+import { useOutletContext, useParams } from "react-router-dom";
+
 import Bmi from "../../components/Bmi";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -11,6 +13,7 @@ import "swiper/css/pagination";
 
 function Home() {
   const [products, setProducts] = useState([]);
+  const { getCart } = useOutletContext(); // 取得 getCart 方法
 
   const getProducts = async () => {
     const productRes = await axios.get(
@@ -18,6 +21,26 @@ function Home() {
     );
     console.log(productRes);
     setProducts(productRes.data.products);
+  };
+
+  // 加入購物車
+  const addCartItem = async (id) => {
+    const data = {
+      data: {
+        product_id: id,
+        qty: 1,
+      },
+    };
+    try {
+      const res = await axios.post(
+        `/v2/api/${process.env.REACT_APP_API_PATH}/cart`,
+        data
+      );
+      console.log(res);
+      getCart();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -126,6 +149,15 @@ function Home() {
                       >
                         查看課程
                       </Link>
+                      {/* 加入購物車 */}
+                      <button
+                        className="btn border-bottom rounded-0 text-nowrap mt-2 float-start stretched-link hover-gradient"
+                        onClick={() => {
+                          addCartItem(product.id);
+                        }}
+                      >
+                        加入購物車
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -142,6 +174,56 @@ function Home() {
             </div>
           </div>
         </div>
+      </div>
+      <div className="container mt-7">
+        <Swiper
+          spaceBetween={5}
+          slidesPerView={1} // 可調整每次展示的商品數量
+          navigation
+          pagination={{ clickable: true }}
+          breakpoints={{
+            640: {
+              // 640px以上的寬度
+              slidesPerView: 2, // 顯示2個
+              spaceBetween: 10, // 每個商品之間的距離
+            },
+            768: {
+              // 768px以上的寬度
+              slidesPerView: 3, // 顯示3個
+              spaceBetween: 15, // 每個商品之間的距離
+            },
+          }}
+        >
+          {products?.map((product) => (
+            <SwiperSlide key={product.id}>
+              <div className=" mt-md-4">
+                <div className="card border-0 mb-4 position-relative position-relative rounded-0">
+                  <img
+                    src={product.imageUrl}
+                    className="card-img-top rounded-0 object-cover"
+                    alt={product.title}
+                    height={300}
+                  />
+                  <div className="card-body p-4">
+                    <h4 className="mb-0 mt-2">{product.title}</h4>
+                    <Link
+                      to={`/product/${product.id}`}
+                      className="btn border-bottom rounded-0 text-nowrap mt-2 float-end stretched-link hover-gradient"
+                    >
+                      查看課程
+                    </Link>
+                    <button
+                      className="btn border-bottom rounded-0 text-nowrap mt-2 float-start stretched-link hover-gradient"
+                      onClick={() => addCartItem(product.id)}
+                    >
+                      加入購物車
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </>
   );
