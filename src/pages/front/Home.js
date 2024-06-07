@@ -99,16 +99,11 @@ function Home() {
         </div>
       </div>
       <div className="bg-black py-7 position-relative">
-        {/* <img
-          src="https://images.unsplash.com/photo-1620188526357-ff08e03da266?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt=""
-          className="position-absolute top-0 left-0 w-100 h-100 opacity-50"
-        /> */}
         <div
           className="bg-image position-absolute top-0 left-0 w-100 h-100 opacity-50"
           style={{
             backgroundImage: `url(https://images.unsplash.com/photo-1620188526357-ff08e03da266?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)`,
-            backgroundAttachment: "fixed", // 设置背景图像附件为固定
+            backgroundAttachment: "fixed",
           }}
         ></div>
         <div className="container mt-7">

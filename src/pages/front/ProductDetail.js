@@ -63,6 +63,20 @@ function ProductDetail() {
           <div className="my-4">
             <img src={product.imageUrl} alt="" className="img-fluid mt-4" />
           </div>
+          {/* 渲染 product.imagesUrl 圖片的陣列 */}
+          <div className="row">
+            <div className="col-3 d-flex">
+              {product.imagesUrl &&
+                product.imagesUrl.map((image, index) => (
+                  <img
+                    src={image}
+                    alt=""
+                    className="img-fluid me-2"
+                    key={index}
+                  />
+                ))}
+            </div>
+          </div>
         </div>
         <div className="col-md-4">
           <div className="input-group mb-3 border mt-3">
