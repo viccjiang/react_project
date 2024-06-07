@@ -30,7 +30,7 @@ function FrontLayout() {
       {/* 巢狀 */}
       <Outlet context={{ getCart, cartData }}></Outlet>
       {/* footer */}
-      <div className="bg-dark">
+      <div className="bg-black">
         <div className="container">
           <div className="d-flex align-items-center justify-content-between text-white py-4">
             <p className="mb-0">© 2020 LOGO All Rights Reserved.</p>
