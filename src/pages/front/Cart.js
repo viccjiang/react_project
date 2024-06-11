@@ -1,18 +1,44 @@
 import { Link, useOutletContext } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
+import DeleteModal from "../../components/DeleteModal";
+import { Modal } from "bootstrap";
 
 function Cart() {
   const { cartData, getCart } = useOutletContext();
   const [loadingItems, setLoadingItem] = useState([]);
 
+  // 點選編輯時要把當前商品傳入，所以使用 tempProduct 來暫存產品資料
+  // 編輯時的資料是透過 tempProduct 來傳遞
+  const [tempProduct, setTempProduct] = useState({});
+
+  // 使用 useRef 綁定元素 modal
+  const deleteModal = useRef(null);
+
+  // 開啟刪除產品彈窗
+  const openDeleteModal = (product) => {
+    // 開啟彈窗時，設定  tempProduct
+    // 這兩個資料需要透過 props 傳入 ProductModal
+    console.log(product);
+    setTempProduct(product);
+    deleteModal.current.show();
+  };
+
+  const closeDeleteModal = () => {
+    deleteModal.current.hide();
+  };
+
   const removeCartItem = async (id) => {
+    console.log(id);
     try {
       const res = await axios.delete(
         `/v2/api/${process.env.REACT_APP_API_PATH}/cart/${id}`
       );
       console.log(res);
-      getCart();
+      if (res.data.success) {
+        getCart();
+        closeDeleteModal();
+      }
     } catch (error) {
       console.log(error);
     }
@@ -41,8 +67,26 @@ function Cart() {
     }
   };
 
+  // 進入頁面中會先觸發 useEffect (生命週期)
+  useEffect(() => {
+    // 刪除產品 modal
+    // 這裡的 deleteModal 已經使用 useRef 綁定元素，初始化 Modal
+    deleteModal.current = new Modal("#deleteModal", {
+      backdrop: "static",
+    });
+
+    // 取得所有產品資料
+    getCart();
+  }, []);
+
   return (
     <div className="container">
+      <DeleteModal
+        text={tempProduct?.product?.title}
+        close={closeDeleteModal}
+        handleDelete={removeCartItem}
+        id={tempProduct.id}
+      />
       <div className="row justify-content-center">
         <div className="col-md-6 bg-white py-5 full-height">
           {cartData?.carts?.length === 0 ? (
@@ -78,7 +122,7 @@ function Cart() {
                         className="position-absolute btn"
                         style={{ top: "10px", right: "10px" }}
                         onClick={() => {
-                          removeCartItem(item.id);
+                          openDeleteModal(item);
                         }}
                       >
                         <i className="bi bi-x-lg"></i>

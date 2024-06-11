@@ -43,7 +43,7 @@ function Checkout() {
         <div className="row justify-content-center flex-md-row flex-column-reverse">
           <form className="col-md-6" onSubmit={handleSubmit(onSubmit)}>
             <div className="bg-white p-4">
-              <h4 className="fw-bold">外送資料</h4>
+              <h4 className="fw-bold">填寫基本資料</h4>
               <div className="mb-2">
                 <Input
                   id="email"
@@ -108,10 +108,23 @@ function Checkout() {
                   }}
                 ></Input>
               </div>
+              {/* 日期 */}
+              {/* <div className="mb-2">
+                <Input
+                  id="date"
+                  labelText="日期"
+                  type="date"
+                  errors={errors}
+                  register={register}
+                  rules={{
+                    required: "日期為必填",
+                  }}
+                ></Input>
+              </div> */}
             </div>
             <div className="d-flex flex-column-reverse flex-md-row mt-4 justify-content-between align-items-md-center align-items-end w-100">
               <Link className="text-dark mt-md-0 mt-3" to="/cart">
-                <i className="bi bi-chevron-left me-2"></i> 繼續點餐
+                <i className="bi bi-chevron-left me-2"></i> 繼續選購
               </Link>
               <button
                 type="submit"
@@ -123,7 +136,7 @@ function Checkout() {
           </form>
           <div className="col-md-4">
             <div className="border p-4 mb-4">
-              <h4 className="mb-4">選購餐點</h4>
+              <h4 className="mb-4">選購課程</h4>
               {cartData?.carts?.map((item) => {
                 return (
                   <div className="d-flex" key={item.id}>

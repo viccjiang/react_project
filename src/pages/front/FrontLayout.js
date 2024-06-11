@@ -40,7 +40,7 @@ function FrontLayout() {
         <div className="container">
           <div className="d-flex align-items-center justify-content-between text-white py-4">
             <p className="mb-0">
-              © 2020 LOGO All Rights Reserved. | 僅個人學習，無任何商業用途
+              © 2024 FIT HER All Rights Reserved. | 僅個人學習，無任何商業用途
             </p>
             <NavLink className="logo navbar-brand fs-1" to="/">
               FIT her.

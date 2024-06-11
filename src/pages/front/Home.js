@@ -8,9 +8,10 @@ import { useOutletContext, useParams } from "react-router-dom";
 import Bmi from "../../components/Bmi";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
+import { Pagination, Mousewheel, Autoplay } from "swiper/modules";
 
 import "swiper/css/pagination";
+import "swiper/css/navigation"; // Navigation module styles
 
 function Home() {
   const [products, setProducts] = useState([]);
@@ -51,14 +52,27 @@ function Home() {
   return (
     <>
       <Swiper
-        className="mySwiper vh-90 position-relative"
+        className="mySwiper vh-100 position-relative"
         pagination={{
+          clickable: true,
           dynamicBullets: true,
         }}
-        modules={[Pagination]}
+        // direction={"vertical"} // 垂直滑動
+        mousewheel={true} // 滑鼠滾輪控制
+        modules={[Pagination, Mousewheel]}
       >
-        <p className="text-light position-absolute top-50 top-50 start-50 translate-middle z-2000">
+        <p
+          className="fs-1 fw-bolder text-light position-absolute top-50 start-50 translate-middle z-2000 "
+          style={{
+            color: "white",
+            textShadow: "black 0.1em 0.1em 0.2em",
+            letterSpacing: "0.1em", // 增加文字間距
+          }}
+        >
           FIT her - 讓妳綻放健康之美！
+          <Link to={"/products"} className="banner-link-hover">
+            <i class="bi bi-arrow-right text-light fs-4">立即加入</i>
+          </Link>
         </p>
         <SwiperSlide>
           <div>
@@ -96,12 +110,12 @@ function Home() {
               alt="..."
             />
           </div>
-          <div className="col-md-4 d-flex flex-column justify-content-center mt-md-0 mt-3 text-light">
+          <div className="col-md-4 d-flex flex-column justify-content-center mt-md-0 mt-3">
             <h2 className="fw-bold">讓妳綻放健康之美！</h2>
             <h5 className="font-weight-normal text-muted mt-2">
               加入我們，開啟自信新篇章
             </h5>
-            <ul>
+            <ul className="list-unstyled my-4">
               <li>💪 專屬女性的健身空間</li>
               <li>🧘‍♀️ 個性化訓練計劃</li>
               <li>🤗 友善社群，支持妳每一步</li>
@@ -110,9 +124,8 @@ function Home() {
               <div className="input-group-append">
                 <Link to={"/products"}>
                   <button
-                    className="btn btn-light rounded-0"
+                    className="btn btn-light rounded-pill hover-gradient px-5 shadow p-3 mb-5 bg-body-tertiary rounded"
                     type="button"
-                    id="search"
                   >
                     立即加入
                   </button>
@@ -122,6 +135,57 @@ function Home() {
           </div>
         </div>
       </div>
+
+      <div className="bg-light py-7">
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="col-md-6 text-center">
+              <p className="subtitle-border">FEATURES</p>
+              <h2 className="fw-bold">你所需要的全在 FIT her</h2>
+              <p className="text-muted mt-2">
+                FIT her
+                提供專屬女性的健身空間，讓妳在舒適的環境中，享受健康運動的樂趣！
+              </p>
+            </div>
+          </div>
+          <div className="row mt-5">
+            <div className="col-md-4">
+              <div className="card border-0 bg-light text-center shadow">
+                <div className="card-body">
+                  <i className="bi bi-tv fs-1 text-primary"></i>
+                  <h4 className="mt-3">女性專屬課程</h4>
+                  <p className="text-muted">
+                    提供多元化的、專為女性設計的多種課程！
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="col-md-4">
+              <div className="card border-0 bg-light text-center shadow">
+                <div className="card-body">
+                  <i className="bi bi-geo-alt fs-1 text-primary"></i>
+                  <h4 className="mt-3">個性化健身計劃</h4>
+                  <p className="text-muted">
+                    量身定制個性化的健身計劃，幫助她們實現最佳效果！
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="col-md-4">
+              <div className="card border-0 bg-light text-center shadow">
+                <div className="card-body">
+                  <i className="bi bi-people fs-1 text-primary"></i>
+                  <h4 className="mt-3">友善社群</h4>
+                  <p className="text-muted">
+                    有一群友善的社群成員，讓妳在這裡找到歸屬感！
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="bg-black py-7 position-relative">
         <div
           className="bg-image position-absolute top-0 left-0 w-100 h-100 opacity-50"
@@ -134,31 +198,39 @@ function Home() {
           <div className="row">
             {products?.map((product) => {
               return (
-                <div className="col-md-4 mt-md-4" key={product.id}>
-                  <div className="card border-0 rounded-4 mb-4 position-relative position-relative rounded-0">
+                <div className="col-sm-6 col-md-4 mt-md-4" key={product.id}>
+                  <div className="home-card card shadow border-0 rounded-4 mb-4 position-relative position-relative rounded-0">
                     <img
                       src={product.imageUrl}
                       className="card-img-top rounded-top-4 object-cover"
                       alt="..."
                       height={300}
                     />
-                    <div className="card-body p-4">
-                      <h4 className="mb-0 mt-2">{product.title}</h4>
-                      <Link
+                    <div className="card-body p-4 d-flex justify-content-between align-items-end">
+                      <div className="d-flex flex-column justify-content-between mb-4">
+                        <h4 className="mb-0 mt-2">{product.title}</h4>
+                        <h5 className="mb-0 mt-2 text-secondary">
+                          NT$ {product.price}
+                        </h5>
+                      </div>
+                      {/* 查看課程 */}
+                      {/* <Link
                         to={`/product/${product.id}`}
                         className="btn border-bottom rounded-0 text-nowrap mt-2 float-end stretched-link hover-gradient"
                       >
                         查看課程
-                      </Link>
+                      </Link> */}
                       {/* 加入購物車 */}
-                      <button
-                        className="btn border-bottom rounded-0 text-nowrap mt-2 float-start stretched-link hover-gradient"
-                        onClick={() => {
-                          addCartItem(product.id);
-                        }}
-                      >
-                        加入購物車
-                      </button>
+                      <div>
+                        <button
+                          className="btn btn-light rounded-pill hover-gradient px-5 shadow bg-body-tertiary rounded stretched-link "
+                          onClick={() => {
+                            addCartItem(product.id);
+                          }}
+                        >
+                          加入購物車
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -180,8 +252,11 @@ function Home() {
         <Swiper
           spaceBetween={5}
           slidesPerView={1} // 可調整每次展示的商品數量
-          navigation
-          pagination={{ clickable: true }}
+          loop={true}
+          autoplay={{
+            delay: 2000,
+            disableOnInteraction: false,
+          }}
           breakpoints={{
             640: {
               // 640px以上的寬度
@@ -194,6 +269,8 @@ function Home() {
               spaceBetween: 15, // 每個商品之間的距離
             },
           }}
+          modules={[Autoplay]}
+          className="home-swiper"
         >
           {products?.map((product) => (
             <SwiperSlide key={product.id}>
