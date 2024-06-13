@@ -22,7 +22,7 @@ function ProductModal({ closeProductModal, getProducts, type, tempProduct }) {
     imagesUrl: ["", "", "", "", ""],
   });
 
-  // 訊息提示，注意這裡的逗號不能清除
+  // 訊息提示，注意這裡的逗號不能清除，取出 dispatch
   const [, dispatch] = useContext(MessageContext);
 
   useEffect(() => {

@@ -8,7 +8,7 @@ import { useOutletContext, useParams } from "react-router-dom";
 import Bmi from "../../components/Bmi";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Mousewheel, Autoplay } from "swiper/modules";
+import { Pagination, Mousewheel, Autoplay, Navigation } from "swiper/modules";
 
 import "swiper/css/pagination";
 import "swiper/css/navigation"; // Navigation module styles
@@ -58,7 +58,9 @@ function Home() {
           dynamicBullets: true,
         }}
         // direction={"vertical"} // 垂直滑動
-        mousewheel={true} // 滑鼠滾輪控制
+        mousewheel={{
+          releaseOnEdges: true, // 滑鼠滾輪控制時，滾動到最邊緣時，會釋放滾輪控制
+        }}
         modules={[Pagination, Mousewheel]}
       >
         <p
@@ -71,7 +73,7 @@ function Home() {
         >
           FIT her - 讓妳綻放健康之美！
           <Link to={"/products"} className="banner-link-hover">
-            <i class="bi bi-arrow-right text-light fs-4">立即加入</i>
+            <i className="bi bi-arrow-right text-light fs-4">立即加入</i>
           </Link>
         </p>
         <SwiperSlide>
@@ -99,18 +101,18 @@ function Home() {
         </SwiperSlide>
       </Swiper>
 
-      <div className="container py-7">
+      <div className="container py-5 py-md-7">
         <div className="row flex-md-row-reverse flex-column">
           <div className="col-md-8">
             <img
               src="https://images.unsplash.com/photo-1550345332-09e3ac987658?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               width="100%"
-              className="object-cover"
+              className="object-cover rounded-5"
               height={400}
               alt="..."
             />
           </div>
-          <div className="col-md-4 d-flex flex-column justify-content-center mt-md-0 mt-3">
+          <div className="col-md-4 d-flex flex-column justify-content-center align-items-center mt-md-0 mt-3">
             <h2 className="fw-bold">讓妳綻放健康之美！</h2>
             <h5 className="font-weight-normal text-muted mt-2">
               加入我們，開啟自信新篇章
@@ -120,18 +122,15 @@ function Home() {
               <li>🧘‍♀️ 個性化訓練計劃</li>
               <li>🤗 友善社群，支持妳每一步</li>
             </ul>
-            <div className="input-group mb-0 mt-4">
-              <div className="input-group-append">
-                <Link to={"/products"}>
-                  <button
-                    className="btn btn-light rounded-pill hover-gradient px-5 shadow p-3 mb-5 bg-body-tertiary rounded"
-                    type="button"
-                  >
-                    立即加入
-                  </button>
-                </Link>
-              </div>
-            </div>
+
+            <Link to={"/products"}>
+              <button
+                className="btn btn-light rounded-pill hover-gradient px-6 shadow p-3 bg-body-tertiary"
+                type="button"
+              >
+                立即加入
+              </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -140,44 +139,98 @@ function Home() {
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-md-6 text-center">
-              <p className="subtitle-border">FEATURES</p>
-              <h2 className="fw-bold">你所需要的全在 FIT her</h2>
+              <p className="fs-5 subtitle-border mb-2">FEATURES</p>
+              <h2 className="fs-1 fw-bold mb-4">
+                {" "}
+                核心<span className="text-colot-gradient">特色</span>
+              </h2>
               <p className="text-muted mt-2">
                 FIT her
                 提供專屬女性的健身空間，讓妳在舒適的環境中，享受健康運動的樂趣！
               </p>
             </div>
           </div>
-          <div className="row mt-5">
+          <div className="row row-cols-1 row-cols-md-3 g-4 mt-4">
             <div className="col-md-4">
-              <div className="card border-0 bg-light text-center shadow">
+              <div
+                className="card h-100 p-4 border-0 rounded-5 bg-light text-center card-hover-gradient"
+                style={{
+                  boxShadow: "0 0 1.5em rgba(75, 0, 130, 0.15)",
+                }}
+              >
                 <div className="card-body">
-                  <i className="bi bi-tv fs-1 text-primary"></i>
-                  <h4 className="mt-3">女性專屬課程</h4>
-                  <p className="text-muted">
-                    提供多元化的、專為女性設計的多種課程！
+                  <i className="bi bi-person-circle fs-1"></i>
+                  <h4
+                    className="mt-4 mb-4"
+                    style={{
+                      letterSpacing: "0.1em", // 增加文字間距
+                    }}
+                  >
+                    女性專屬課程
+                  </h4>
+                  <p
+                    className=""
+                    style={{
+                      letterSpacing: "0.1em", // 增加文字間距
+                    }}
+                  >
+                    提供多元化的、專為女性設計的多種課程！多元化選擇，為妳量身打造！
                   </p>
                 </div>
               </div>
             </div>
             <div className="col-md-4">
-              <div className="card border-0 bg-light text-center shadow">
+              <div
+                className="card h-100 p-4 border-0 rounded-5 bg-light text-center card-hover-gradient"
+                style={{
+                  boxShadow: "0 0 1.5em rgba(75, 0, 130, 0.15)",
+                }}
+              >
                 <div className="card-body">
-                  <i className="bi bi-geo-alt fs-1 text-primary"></i>
-                  <h4 className="mt-3">個性化健身計劃</h4>
-                  <p className="text-muted">
-                    量身定制個性化的健身計劃，幫助她們實現最佳效果！
+                  <i className="bi bi-card-checklist fs-1"></i>
+                  <h4
+                    className="mt-4 mb-4"
+                    style={{
+                      letterSpacing: "0.1em", // 增加文字間距
+                    }}
+                  >
+                    個性化健身計劃
+                  </h4>
+                  <p
+                    className=""
+                    style={{
+                      letterSpacing: "0.1em", // 增加文字間距
+                    }}
+                  >
+                    量身定制個性化的健身計劃，幫助她們實現最佳效果，讓每個人都擁有健康自信！
                   </p>
                 </div>
               </div>
             </div>
             <div className="col-md-4">
-              <div className="card border-0 bg-light text-center shadow">
+              <div
+                className="card h-100 p-4 border-0 rounded-5 bg-light text-center card-hover-gradient"
+                style={{
+                  boxShadow: "0 0 1.5em rgba(75, 0, 130, 0.15)",
+                }}
+              >
                 <div className="card-body">
-                  <i className="bi bi-people fs-1 text-primary"></i>
-                  <h4 className="mt-3">友善社群</h4>
-                  <p className="text-muted">
-                    有一群友善的社群成員，讓妳在這裡找到歸屬感！
+                  <i className="bi bi-person-hearts fs-1"></i>
+                  <h4
+                    className="mt-4 mb-4"
+                    style={{
+                      letterSpacing: "0.1em", // 增加文字間距
+                    }}
+                  >
+                    友善社群
+                  </h4>
+                  <p
+                    className=""
+                    style={{
+                      letterSpacing: "0.1em", // 增加文字間距
+                    }}
+                  >
+                    有一群友善的社群成員，讓妳在這裡找到歸屬感，獲得溫暖和支持！
                   </p>
                 </div>
               </div>
@@ -194,7 +247,17 @@ function Home() {
             backgroundAttachment: "fixed",
           }}
         ></div>
-        <div className="container mt-7">
+
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="col-md-6 text-center">
+              <p className="fs-5 subtitle-border mb-2">THE BEST COURSE</p>
+              <h2 className="fs-1 fw-bold mb-4 text-white">熱門課程</h2>
+              <p className="text-white mt-2">
+                準備好改變你的身心嗎？立即報名參加這個專屬體驗，重新定義你的健身之旅！
+              </p>
+            </div>
+          </div>
           <div className="row">
             {products?.map((product) => {
               return (
@@ -206,8 +269,8 @@ function Home() {
                       alt="..."
                       height={300}
                     />
-                    <div className="card-body p-4 d-flex justify-content-between align-items-end">
-                      <div className="d-flex flex-column justify-content-between mb-4">
+                    <div className="card-body p-4 d-flex flex-sm-column flex-md-column flex-lg-row justify-content-between align-items-center">
+                      <div className="d-flex flex-column justify-content-between  mb-4">
                         <h4 className="mb-0 mt-2">{product.title}</h4>
                         <h5 className="mb-0 mt-2 text-secondary">
                           NT$ {product.price}
@@ -223,7 +286,7 @@ function Home() {
                       {/* 加入購物車 */}
                       <div>
                         <button
-                          className="btn btn-light rounded-pill hover-gradient px-5 shadow bg-body-tertiary rounded stretched-link "
+                          className="btn btn-light rounded-pill hover-gradient px-5  shadow bg-body-tertiary rounded stretched-link "
                           onClick={() => {
                             addCartItem(product.id);
                           }}
@@ -242,6 +305,14 @@ function Home() {
       <div className="bg-light py-7">
         <div className="container">
           <div className="row justify-content-center">
+            <div className="col-md-6 text-center">
+              <p className="fs-5 subtitle-border mb-2">BMI CALCULATOR</p>
+              <h2 className="fs-1 fw-bold mb-4 ">
+                BMI <span className="text-colot-gradient">身體質量指數</span>
+              </h2>
+            </div>
+          </div>
+          <div className="row justify-content-center">
             <div className="col text-center">
               <Bmi />
             </div>
@@ -249,14 +320,25 @@ function Home() {
         </div>
       </div>
       <div className="container mt-7">
+        <div className="row justify-content-center">
+          <div className="col-md-6 text-center">
+            <p className="fs-5 subtitle-border mb-2">RECOMMENDATION</p>
+            <h2 className="fs-1 fw-bold mb-4">
+              專屬<span className="text-colot-gradient">推薦</span>
+            </h2>
+            <p className="text-muted mt-2">
+              準備好改變你的身心嗎？立即報名參加這個專屬體驗，重新定義你的健身之旅！
+            </p>
+          </div>
+        </div>
         <Swiper
           spaceBetween={5}
           slidesPerView={1} // 可調整每次展示的商品數量
-          loop={true}
-          autoplay={{
-            delay: 2000,
-            disableOnInteraction: false,
-          }}
+          // loop={true} // 幻燈片數量不足時會報錯
+          // autoplay={{
+          //   delay: 2000,
+          //   disableOnInteraction: false,
+          // }}
           breakpoints={{
             640: {
               // 640px以上的寬度
@@ -269,33 +351,30 @@ function Home() {
               spaceBetween: 15, // 每個商品之間的距離
             },
           }}
-          modules={[Autoplay]}
+          navigation={true}
+          modules={[Autoplay, Navigation]}
           className="home-swiper"
         >
           {products?.map((product) => (
             <SwiperSlide key={product.id}>
               <div className=" mt-md-4">
-                <div className="card border-0 mb-4 position-relative position-relative rounded-0">
+                <div className="card border-0 mb-4 position-relative position-relative rounded-5">
                   <img
                     src={product.imageUrl}
-                    className="card-img-top rounded-0 object-cover"
+                    className="card-img-top rounded-5 object-cover"
                     alt={product.title}
                     height={300}
                   />
                   <div className="card-body p-4">
                     <h4 className="mb-0 mt-2">{product.title}</h4>
-                    <Link
-                      to={`/product/${product.id}`}
-                      className="btn border-bottom rounded-0 text-nowrap mt-2 float-end stretched-link hover-gradient"
-                    >
-                      查看課程
-                    </Link>
-                    <button
-                      className="btn border-bottom rounded-0 text-nowrap mt-2 float-start stretched-link hover-gradient"
-                      onClick={() => addCartItem(product.id)}
-                    >
-                      加入購物車
-                    </button>
+                    <div className="d-flex justify-content-end">
+                      <Link
+                        to={`/product/${product.id}`}
+                        className="btn btn btn-light rounded-pill hover-gradient px-5 shadow bg-body-tertiary rounded"
+                      >
+                        查看課程
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>

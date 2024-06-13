@@ -98,31 +98,6 @@ function CouponModal({ closeModal, getCoupons, type, tempCoupon }) {
     }
   };
 
-  // 上傳圖片/檔案
-  // const uploadFile = async (file) => {
-  //   console.log(file);
-  //   if (!file) return;
-
-  //   const formData = new FormData();
-  //   formData.append("file-to-upload", file);
-
-  //   try {
-  //     const res = await axios.post(
-  //       `/v2/api/${process.env.REACT_APP_API_PATH}/admin/upload`,
-  //       formData
-  //     );
-  //     console.log(res);
-  //     if (res.data.success) {
-  //       setTempData({
-  //         ...tempData,
-  //         imageUrl: res.data.imageUrl,
-  //       });
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   return (
     <div
       className="modal fade"
@@ -185,6 +160,9 @@ function CouponModal({ closeModal, getCoupons, type, tempCoupon }) {
                     name="due_date"
                     placeholder="請輸入到期日"
                     className="form-control mt-1"
+                    onChange={(e) => {
+                      setDate(new Date(e.target.value));
+                    }}
                     value={`${date.getFullYear().toString()}-${(
                       date.getMonth() + 1
                     )
@@ -193,9 +171,6 @@ function CouponModal({ closeModal, getCoupons, type, tempCoupon }) {
                       .getDate()
                       .toString()
                       .padStart(2, 0)}`}
-                    onChange={(e) => {
-                      setDate(new Date(e.target.value));
-                    }}
                   />
                 </label>
               </div>

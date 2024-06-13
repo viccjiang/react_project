@@ -66,7 +66,17 @@ function Navbar({ cartData }) {
               <ul className="navbar-nav">
                 <li className="nav-item active">
                   <NavLink className="nav-link ps-0" to="/products">
-                    產品列表
+                    所有課程
+                  </NavLink>
+                </li>
+                <li className="nav-item active">
+                  <NavLink className="nav-link ps-0" to="/about">
+                    關於我們
+                  </NavLink>
+                </li>
+                <li className="nav-item active">
+                  <NavLink className="nav-link ps-0" to="/coach">
+                    健身教練
                   </NavLink>
                 </li>
               </ul>

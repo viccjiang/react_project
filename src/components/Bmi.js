@@ -22,8 +22,8 @@ export default function Bmi() {
 
   return (
     <div className="bmi">
-      <h3 className="fw-bolder mb-4">BMI 計算機</h3>
-      <p className="text-muted mb-4">
+      {/* <h3 className="fw-bolder mb-4">BMI 計算機</h3> */}
+      <p className="text-muted mb-6">
         世界衛生組織建議以身體質量指數 (Body Mass Index, BMI) 來衡量肥胖程度。
       </p>
       <div className="container mt-4">
