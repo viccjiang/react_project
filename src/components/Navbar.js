@@ -64,21 +64,38 @@ function Navbar({ cartData }) {
               id="navbarNav"
             >
               <ul className="navbar-nav">
-                <li className="nav-item active">
-                  <NavLink className="nav-link ps-0" to="/products">
-                    所有課程
-                  </NavLink>
-                </li>
-                <li className="nav-item active">
-                  <NavLink className="nav-link ps-0" to="/about">
+                <li className="nav-item ">
+                  <NavLink
+                    className={({ isActive }) =>
+                      [
+                        "nav-link ps-0",
+                        isActive ? "router-link-active" : null,
+                      ].join(" ")
+                    }
+                    to="/about"
+                  >
                     關於我們
                   </NavLink>
                 </li>
-                <li className="nav-item active">
+                <li className="nav-item ">
+                  <NavLink
+                    className={({ isActive }) =>
+                      [
+                        "nav-link ps-0",
+                        isActive ? "router-link-active" : null,
+                      ].join(" ")
+                    }
+                    to="/products"
+                  >
+                    所有課程
+                  </NavLink>
+                </li>
+
+                {/* <li className="nav-item active">
                   <NavLink className="nav-link ps-0" to="/coach">
                     健身教練
                   </NavLink>
-                </li>
+                </li> */}
               </ul>
             </div>
             <div className="d-flex">

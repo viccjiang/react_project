@@ -370,7 +370,7 @@ function Home() {
                     <div className="d-flex justify-content-end">
                       <Link
                         to={`/product/${product.id}`}
-                        className="btn btn btn-light rounded-pill hover-gradient px-5 shadow bg-body-tertiary rounded"
+                        className="btn btn btn-light rounded-pill hover-gradient px-5 shadow bg-body-tertiary rounded stretched-link"
                       >
                         查看課程
                       </Link>

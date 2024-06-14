@@ -227,3 +227,75 @@
   background-image: linear-gradient(120deg,  #712cf9 ,#ff99cc 100%);
   color: white;
 }
+
+.carousel-item-img{
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.about-img{
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.navbar-nav .nav-item{
+  margin-right: 20px;
+}
+
+
+.router-link-active {
+  border-bottom: 2px solid; /* 底部邊框的厚度 */
+  border-image: linear-gradient(to right, #712cf9, #ff99cc) 1; /* 邊框漸層 */
+  background: linear-gradient(to right, #712cf9, #ff99cc); /* 背景漸層 */
+  -webkit-background-clip: text; /* 剪裁背景到文字 */
+  -webkit-text-fill-color: transparent; /* 文字填充透明 */
+  color: transparent; /* 設置文字顏色透明 */
+}
+
+// 手機版 router-link-active 漸層消失
+@media (max-width: 768px) {
+  .router-link-active {
+    border-bottom: none;
+  }
+}
+
+.shopBtn {
+  position: absolute;
+  border: 0;
+  top: 375px;
+  right: 10px;
+  z-index: 1200;
+}
+
+.product-link img {
+  transition: filter 0.3s ease; /* 過度效果 */
+}
+
+.product-link img:hover {
+  filter: brightness(70%); /* 亮度70% */
+}
+
+.overlay {
+  position: absolute;
+  // 正中央
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.overlay-text {
+  color: white; /* 文字顏色 */
+  font-size: 1.5rem; /* 根據需要調整大小 */
+  font-weight: bold;
+}
+
+.card:hover .overlay {
+  opacity: 1;
+}

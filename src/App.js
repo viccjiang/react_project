@@ -13,6 +13,7 @@ import Cart from "./pages/front/Cart";
 import Checkout from "./pages/front/Checkout";
 import Success from "./pages/front/Success";
 import NotFound from "./pages/NotFound";
+import About from "./pages/front/About";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         {/* 前台 */}
         <Route path="/" element={<FrontLayout />}>
           <Route path="" element={<Home />}></Route>
+          <Route path="about" element={<About />}></Route>
           <Route path="products" element={<Products />}></Route>
           <Route path="product/:id" element={<ProductDetail />}></Route>
           <Route path="cart" element={<Cart />}></Route>
