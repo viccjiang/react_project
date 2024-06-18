@@ -67,6 +67,16 @@ function Cart() {
     }
   };
 
+  // function formatCurrency(amount) {
+  //   // 確保輸入是數字
+  //   if (isNaN(amount)) {
+  //     throw new Error("輸入必須是數字");
+  //   }
+
+  //   // 使用 toLocaleString 方法進行格式化
+  //   return "NT$" + Number(amount).toLocaleString("zh-TW");
+  // }
+
   // 進入頁面中會先觸發 useEffect (生命週期)
   useEffect(() => {
     // 刪除產品 modal
@@ -87,35 +97,43 @@ function Cart() {
         handleDelete={removeCartItem}
         id={tempProduct.id}
       />
-      <div className="row justify-content-center">
-        <div className="col-md-6 bg-white py-5 full-height">
+      <div className="row d-flex justify-content-center">
+        <div className="col-md-8 bg-white py-5 full-height">
           {cartData?.carts?.length === 0 ? (
             <>
-              <div className="alert alert-secondary">還沒有選擇課程喔</div>
+              <div className="alert alert-secondary text-center py-6">
+                您還沒有選擇課程喔
+              </div>
               <Link
                 to="/products"
-                className="btn btn-dark w-100 mt-4 rounded-0 py-3"
+                className="btn btn-primary rounded-3 w-100  rounded-0 py-3"
               >
-                選擇課程
+                選擇健身或其他課程
               </Link>
             </>
           ) : (
             <>
               <div className="d-flex justify-content-between">
-                <h2 className="mt-2">您的課程</h2>
+                <h2 className="mt-2">您選購的課程</h2>
               </div>
 
               {cartData?.carts?.map((item) => {
                 return (
-                  <div className="d-flex mt-4 bg-light" key={item.id}>
-                    <img
-                      src={item.product.imageUrl}
-                      alt=""
-                      className="object-cover"
-                      style={{
-                        width: "120px",
-                      }}
-                    />
+                  <div
+                    className="d-flex mt-4 bg-light cart-bg-hover rounded-4"
+                    key={item.id}
+                  >
+                    <Link to={`/product/${item.product.id}`}>
+                      <img
+                        src={item.product.imageUrl}
+                        alt=""
+                        className="img-fluid object-cover rounded-start-4"
+                        style={{
+                          width: "250px",
+                          height: "150px",
+                        }}
+                      />
+                    </Link>
                     <div className="w-100 p-3 position-relative">
                       <button
                         type="button"
@@ -125,7 +143,7 @@ function Cart() {
                           openDeleteModal(item);
                         }}
                       >
-                        <i className="bi bi-x-lg"></i>
+                        <i className="bi bi-trash3 text-danger fs-5"></i>
                       </button>
                       <p className="mb-0 fw-bold">{item.product.title}</p>
                       <p
@@ -167,7 +185,7 @@ function Cart() {
               </div>
               <Link
                 to="/checkout"
-                className="btn btn-dark w-100 mt-4 rounded-0 py-3"
+                className="btn btn-primary w-100 mt-4 rounded-3 py-3 "
               >
                 確認課程正確
               </Link>

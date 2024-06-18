@@ -252,6 +252,7 @@
   -webkit-background-clip: text; /* 剪裁背景到文字 */
   -webkit-text-fill-color: transparent; /* 文字填充透明 */
   color: transparent; /* 設置文字顏色透明 */
+  font-weight: bold; /* 加粗字體 */
 }
 
 // 手機版 router-link-active 漸層消失
@@ -298,4 +299,19 @@
 
 .card:hover .overlay {
   opacity: 1;
+}
+
+.product-detail-hover {
+  display: inline-block; /* Ensures the element can move */
+  transition: transform 0.3s ease; /* Smooth transition for the movement */
+}
+
+.product-detail-hover:hover {
+  background-image: linear-gradient(120deg, #712cf9, #ff99cc 100%);
+}
+
+
+.cart-bg-hover:hover{
+  // 顏色透明度為 0.8
+  background-image: linear-gradient(120deg, #dddddd, #dddddd 100%);
 }

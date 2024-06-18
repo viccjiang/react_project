@@ -68,7 +68,7 @@ function Navbar({ cartData }) {
                   <NavLink
                     className={({ isActive }) =>
                       [
-                        "nav-link ps-0",
+                        "nav-link px-0",
                         isActive ? "router-link-active" : null,
                       ].join(" ")
                     }
@@ -81,13 +81,26 @@ function Navbar({ cartData }) {
                   <NavLink
                     className={({ isActive }) =>
                       [
-                        "nav-link ps-0",
+                        "nav-link px-0",
                         isActive ? "router-link-active" : null,
                       ].join(" ")
                     }
                     to="/products"
                   >
                     所有課程
+                  </NavLink>
+                </li>
+                <li className="nav-item ">
+                  <NavLink
+                    className={({ isActive }) =>
+                      [
+                        "nav-link px-0",
+                        isActive ? "router-link-active" : null,
+                      ].join(" ")
+                    }
+                    to="/cart"
+                  >
+                    購物車
                   </NavLink>
                 </li>
 

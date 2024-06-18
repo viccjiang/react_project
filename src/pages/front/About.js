@@ -5,7 +5,7 @@ function About() {
       <Banner />
       <div className="container my-6">
         <div className="row">
-          <div className="col-md-6 d-flex flex-column justify-content-between">
+          <div className="col-md-6 d-flex flex-column justify-content-between py-6">
             <div>
               <h2 className="fw-bolder">關於 FIT her.</h2>
               <h6> 歡迎來到 FIT her.，專為女性打造的身心健身房。</h6>
@@ -18,9 +18,9 @@ function About() {
               her.，在這裡，我們一起鍛煉，共同創造一個積極、健康、自信的女性社區，攜手迎接更美好的未來。
             </p>
           </div>
-          <div className="col-md-6">
+          <div className="col-md-6 py-6">
             <img
-              className="img-fluid about-img"
+              className="img-fluid about-img rounded-5"
               src="https://images.unsplash.com/photo-1571019613914-85f342c6a11e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt=""
             />

@@ -67,7 +67,7 @@ function Products() {
       <Banner />
       <div className="container mt-md-5 mt-3 mb-7 full-height">
         <Loading isLoading={isLoading} />
-        <div className="row">
+        <div className="row mb-4">
           {/* 產品列表 */}
           {products.map((product, index) => {
             return (
@@ -121,7 +121,7 @@ function Products() {
           })}
         </div>
         {/* 分頁元件 */}
-        <nav className="d-flex justify-content-center">
+        <nav className="d-flex justify-content-end">
           <Pagination pagination={pagination} changePage={getProducts} />
         </nav>
       </div>
