@@ -5,13 +5,25 @@ export const messageSlice = createSlice({
   initialState: [],
   reducers: {
     createMessage(state, action) {
-      // 加入成功訊息
-      state.push({
-        id: action.payload.id,
-        type: "success",
-        title: "成功",
-        text: action.payload.message,
-      });
+      if (action.payload.success) {
+        // 加入成功訊息
+        state.push({
+          id: action.payload.id,
+          type: "success", // 樣式
+          title: "成功",
+          text: action.payload.message,
+        });
+      } else {
+        // 加入失敗訊息
+        state.push({
+          id: action.payload.id,
+          type: "danger", // 樣式
+          title: "錯誤",
+          text: Array.isArray(action.payload?.message)
+            ? action.payload?.message.join("、")
+            : action.payload?.message,
+        });
+      }
     },
     removeMessage(state, action) {
       const index = state.findIndex((item) => item === action.payload);

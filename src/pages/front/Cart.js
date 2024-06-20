@@ -4,7 +4,14 @@ import axios from "axios";
 import DeleteModal from "../../components/DeleteModal";
 import { Modal } from "bootstrap";
 
+// redux
+import { useDispatch } from "react-redux";
+import { createMessageAsync } from "../../slice/messageSlice";
+import { set } from "react-hook-form";
+
 function Cart() {
+  const dispatch = useDispatch();
+
   const { cartData, getCart } = useOutletContext();
   const [loadingItems, setLoadingItem] = useState([]);
 
@@ -61,9 +68,14 @@ function Cart() {
       setLoadingItem(
         loadingItems.filter((loadingObject) => loadingObject !== item.id)
       );
+      dispatch(createMessageAsync(res.data));
       getCart();
     } catch (error) {
       console.log(error);
+      dispatch(createMessageAsync(error.response.data));
+      setLoadingItem(
+        loadingItems.filter((loadingObject) => loadingObject !== item.id)
+      );
     }
   };
 

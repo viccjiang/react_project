@@ -22,7 +22,6 @@ function ProductDetail() {
     const productRes = await axios.get(
       `/v2/api/${process.env.REACT_APP_API_PATH}/product/${id}`
     );
-    console.log(productRes);
     setProduct(productRes.data.product);
   };
 
@@ -39,13 +38,12 @@ function ProductDetail() {
         `/v2/api/${process.env.REACT_APP_API_PATH}/cart`,
         data
       );
-      console.log(res);
       dispatch(createMessageAsync(res.data));
       getCart();
       setIsLoading(false);
     } catch (error) {
-      console.log(error);
       setIsLoading(false);
+      dispatch(createMessageAsync(error.response.data));
     }
   };
 

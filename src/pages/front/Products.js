@@ -56,7 +56,6 @@ function Products() {
         `/v2/api/${process.env.REACT_APP_API_PATH}/cart`,
         data
       );
-      console.log(res);
       dispatch(createMessageAsync(res.data));
       getCart();
     } catch (error) {
