@@ -2,7 +2,13 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useOutletContext, useParams } from "react-router-dom";
 
+// redux
+import { useDispatch } from "react-redux";
+import { createMessageAsync } from "../../slice/messageSlice";
+
 function ProductDetail() {
+  const dispatch = useDispatch();
+
   const [product, setProduct] = useState({}); // 單一產品資料
   const [cartQuantity, setCartQuantity] = useState(1); // 購物車數量
   const [isLoading, setIsLoading] = useState(false); // 是否載入中
@@ -34,6 +40,7 @@ function ProductDetail() {
         data
       );
       console.log(res);
+      dispatch(createMessageAsync(res.data));
       getCart();
       setIsLoading(false);
     } catch (error) {

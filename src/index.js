@@ -1,6 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
+// 使用 redux 管理狀態
+import { store } from "./store";
+import { Provider } from "react-redux";
+
 // 客製化 bootstrap 變數
 import "./stylesheets/all.scss";
 // bootstrap icon
@@ -9,6 +13,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
+// swiper
 import "swiper/css";
 
 // gh-pages 專案上線時 HashRouter
@@ -23,7 +28,10 @@ root.render(
   <React.StrictMode>
     {/* hash router 須包在App 外層 */}
     <HashRouter>
-      <App />
+      {/* redux store */}
+      <Provider store={store}>
+        <App />
+      </Provider>
     </HashRouter>
   </React.StrictMode>
 );

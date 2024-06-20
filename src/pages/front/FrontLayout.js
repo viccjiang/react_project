@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import { NavLink, Link } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import axios from "axios";
+import MessageToast from "../../components/MessageToast"; // redux 訊息提示
 
 function FrontLayout() {
   const [cartData, setCartData] = useState([]); // 購物車資料
@@ -26,6 +27,8 @@ function FrontLayout() {
 
   return (
     <>
+      {/* 訊息提示 */}
+      <MessageToast></MessageToast>
       {/* header */}
       <Navbar cartData={cartData}></Navbar>
       {/* 巢狀 */}

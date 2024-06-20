@@ -6,7 +6,12 @@ import Pagination from "../../components/Pagination";
 import Loading from "../../components/Loading";
 import Banner from "../../components/Banner";
 
+// redux
+import { useDispatch } from "react-redux";
+import { createMessageAsync } from "../../slice/messageSlice";
+
 function Products() {
+  const dispatch = useDispatch();
   const [products, setProducts] = useState([]);
   const [pagination, setPagination] = useState({});
   const [isLoading, setLoading] = useState(false);
@@ -52,6 +57,7 @@ function Products() {
         data
       );
       console.log(res);
+      dispatch(createMessageAsync(res.data));
       getCart();
     } catch (error) {
       console.log(error);
