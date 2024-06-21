@@ -7,9 +7,11 @@ import MessageToast from "../../components/MessageToast"; // redux 訊息提示
 
 function FrontLayout() {
   const [cartData, setCartData] = useState([]); // 購物車資料
+  const [isLoading, setLoading] = useState(false);
 
   // 取得購物車資料
   const getCart = async () => {
+    setLoading(true);
     try {
       const res = await axios.get(
         `/v2/api/${process.env.REACT_APP_API_PATH}/cart`
@@ -19,6 +21,7 @@ function FrontLayout() {
     } catch (error) {
       console.log(error);
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -32,7 +35,7 @@ function FrontLayout() {
       {/* header */}
       <Navbar cartData={cartData}></Navbar>
       {/* 巢狀 */}
-      <Outlet context={{ getCart, cartData }}></Outlet>
+      <Outlet context={{ getCart, cartData, isLoading }}></Outlet>
       {/* link */}
       <div className="bg-black">
         <div className="footer-rounded pt-8 pt-md-6 rounded-bottom-40 bg-white"></div>

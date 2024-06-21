@@ -2,17 +2,18 @@ import { Link, useOutletContext } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import DeleteModal from "../../components/DeleteModal";
+import DeleteAllModal from "../../components/DeleteAllModal";
 import { Modal } from "bootstrap";
+import Loading from "../../components/Loading";
 
 // redux
 import { useDispatch } from "react-redux";
 import { createMessageAsync } from "../../slice/messageSlice";
-import { set } from "react-hook-form";
 
 function Cart() {
   const dispatch = useDispatch();
 
-  const { cartData, getCart } = useOutletContext();
+  const { cartData, getCart, isLoading } = useOutletContext();
   const [loadingItems, setLoadingItem] = useState([]);
 
   // 點選編輯時要把當前商品傳入，所以使用 tempProduct 來暫存產品資料
@@ -21,6 +22,7 @@ function Cart() {
 
   // 使用 useRef 綁定元素 modal
   const deleteModal = useRef(null);
+  const deleteModalAll = useRef(null);
 
   // 開啟刪除產品彈窗
   const openDeleteModal = (product) => {
@@ -33,6 +35,31 @@ function Cart() {
 
   const closeDeleteModal = () => {
     deleteModal.current.hide();
+  };
+
+  // 開啟刪除全部產品彈窗
+  const openDeleteModalAll = () => {
+    deleteModalAll.current.show();
+  };
+
+  const closeDeleteModalAll = () => {
+    deleteModalAll.current.hide();
+  };
+
+  // 做一個刪除全部購物車的功能
+  const removeAllCart = async () => {
+    try {
+      const res = await axios.delete(
+        `/v2/api/${process.env.REACT_APP_API_PATH}/carts`
+      );
+      console.log(res);
+      if (res.data.success) {
+        getCart();
+        closeDeleteModalAll();
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const removeCartItem = async (id) => {
@@ -97,17 +124,31 @@ function Cart() {
       backdrop: "static",
     });
 
+    // 刪除全部產品 modal
+    // 這裡的 deleteModalAll 已經使用 useRef 綁定元素，初始化 Modal
+    deleteModalAll.current = new Modal("#deleteAllModal", {
+      backdrop: "static",
+    });
+
     // 取得所有產品資料
     getCart();
   }, []);
 
   return (
     <div className="container">
+      <Loading isLoading={isLoading} />
+      {/* DeleteModal Single*/}
       <DeleteModal
         text={tempProduct?.product?.title}
         close={closeDeleteModal}
         handleDelete={removeCartItem}
         id={tempProduct.id}
+      />
+      {/* DeleteAll Modal */}
+      <DeleteAllModal
+        text={tempProduct?.product?.title}
+        close={closeDeleteModalAll}
+        handleDelete={removeAllCart}
       />
       <div className="row d-flex justify-content-center">
         <div className="col-md-8 bg-white py-5 full-height">
@@ -191,16 +232,29 @@ function Cart() {
                   </div>
                 );
               })}
+
               <div className="d-flex justify-content-between mt-4">
                 <p className="mb-0 h4 fw-bold">總金額</p>
                 <p className="mb-0 h4 fw-bold">NT${cartData.final_total}</p>
               </div>
-              <Link
-                to="/checkout"
-                className="btn btn-primary w-100 mt-4 rounded-3 py-3 "
-              >
-                確認課程正確
-              </Link>
+              <div className="d-flex flex-column flex-md-row gap-2 mt-4">
+                {/* 刪除全部按鈕 */}
+                <button
+                  type="button"
+                  className="btn btn-outline-danger w-100  rounded-3 py-3"
+                  onClick={() => {
+                    openDeleteModalAll();
+                  }}
+                >
+                  刪除全部
+                </button>
+                <Link
+                  to="/checkout"
+                  className="btn btn-primary w-100  rounded-3 py-3 "
+                >
+                  確認課程正確
+                </Link>
+              </div>
             </>
           )}
         </div>

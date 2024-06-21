@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
 
-import { useOutletContext, useParams } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
+import Loading from "../../components/Loading";
 
 import Bmi from "../../components/Bmi";
 
@@ -15,14 +15,17 @@ import "swiper/css/navigation"; // Navigation module styles
 
 function Home() {
   const [products, setProducts] = useState([]);
+  const [isLoading, setLoading] = useState(false);
   const { getCart } = useOutletContext(); // 取得 getCart 方法
 
   const getProducts = async () => {
+    setLoading(true);
     const productRes = await axios.get(
       `/v2/api/${process.env.REACT_APP_API_PATH}/products/?category=健身`
     );
     console.log(productRes);
     setProducts(productRes.data.products);
+    setLoading(false);
   };
 
   // 加入購物車
@@ -51,6 +54,7 @@ function Home() {
 
   return (
     <>
+      <Loading isLoading={isLoading} />
       <Swiper
         className="mySwiper vh-100 position-relative"
         pagination={{
