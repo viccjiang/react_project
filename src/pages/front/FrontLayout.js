@@ -93,7 +93,7 @@ function FrontLayout() {
                 </a>
               </li>
             </ul>
-            <ul className="list-unstyled d-flex ms-md-auto">
+            {/* <ul className="list-unstyled d-flex ms-md-auto">
               <li className="mx-2">
                 <a
                   href="https://www.facebook.com/"
@@ -126,7 +126,7 @@ function FrontLayout() {
                   <span className="icon-base icon-message bg-white m-2"></span>
                 </Link>
               </li>
-            </ul>
+            </ul> */}
           </div>
         </div>
       </div>
