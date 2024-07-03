@@ -70,14 +70,16 @@ function ProductDetail() {
             <div className="row">
               <div className="col-3 d-flex">
                 {product.imagesUrl &&
-                  product.imagesUrl.map((image, index) => (
-                    <img
-                      src={image}
-                      alt=""
-                      className="img-fluid me-2"
-                      key={index}
-                    />
-                  ))}
+                  product.imagesUrl
+                    .filter((image) => image !== "") // 過濾空字串，避免渲染空圖片
+                    .map((image, index) => (
+                      <img
+                        src={image}
+                        alt=""
+                        className="img-fluid me-2"
+                        key={index}
+                      />
+                    ))}
               </div>
             </div>
           </div>
