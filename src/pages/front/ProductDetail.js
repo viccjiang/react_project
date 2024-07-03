@@ -54,11 +54,11 @@ function ProductDetail() {
   return (
     <div className="full-height">
       <div
-      // style={{
-      //   minHeight: "300px",
-      //   backgroundImage: `url(${product.imageUrl})`,
-      //   backgroundPosition: "center center",
-      // }}
+        style={{
+          minHeight: "300px",
+          backgroundImage: `url(${product.imageUrl})`,
+          backgroundPosition: "center center",
+        }}
       ></div>
       <div className="container">
         <div className="row justify-content-between mt-4 mb-7">

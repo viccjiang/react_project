@@ -64,7 +64,6 @@
 ## 文件
 
 - 圖片來源皆由：unsplash.com
-- Logo 製作來至：[designevo](https://www.designevo.com/tw/)，可製作免費 Logo 標示，但免費版只支持下載 300x300 低畫質圖片。
 - API：[六角學院](https://www.hexschool.com/)
 
 ## 授權
