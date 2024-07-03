@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/react_project/static/css/main.e4bb9bd7.css",
-    "main.js": "/react_project/static/js/main.aa4bc3a3.js",
+    "main.js": "/react_project/static/js/main.909f157f.js",
     "static/js/453.ed3810f9.chunk.js": "/react_project/static/js/453.ed3810f9.chunk.js",
     "static/media/bootstrap-icons.woff?": "/react_project/static/media/bootstrap-icons.39795c0b4513de014cf8.woff",
     "static/media/bootstrap-icons.woff2?": "/react_project/static/media/bootstrap-icons.b7bcc075b395c14ce8c2.woff2",
     "static/media/undraw_personal_training_0dqn.svg": "/react_project/static/media/undraw_personal_training_0dqn.f8aa46f22ffea6280d53084df7ed5c04.svg",
     "index.html": "/react_project/index.html",
     "main.e4bb9bd7.css.map": "/react_project/static/css/main.e4bb9bd7.css.map",
-    "main.aa4bc3a3.js.map": "/react_project/static/js/main.aa4bc3a3.js.map",
+    "main.909f157f.js.map": "/react_project/static/js/main.909f157f.js.map",
     "453.ed3810f9.chunk.js.map": "/react_project/static/js/453.ed3810f9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e4bb9bd7.css",
-    "static/js/main.aa4bc3a3.js"
+    "static/js/main.909f157f.js"
   ]
 }
