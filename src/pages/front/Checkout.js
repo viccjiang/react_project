@@ -5,7 +5,7 @@ import { Input } from "../../components/FormElements";
 import axios from "axios";
 
 function Checkout() {
-  const { cartData } = useOutletContext();
+  const { cartData, getCart } = useOutletContext();
 
   const {
     register,
@@ -34,6 +34,7 @@ function Checkout() {
       form
     );
     console.log(res);
+    getCart();
     navigate(`/success/${res.data.orderId}`);
   };
 

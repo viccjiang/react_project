@@ -214,6 +214,7 @@ function Cart() {
                             value={item.qty}
                             disabled={loadingItems.includes(item.id)}
                             onChange={(e) => {
+                              // 注意型別，這裡的 e.target.value 是字串，所以要轉成數字
                               updateCartItem(item, e.target.value * 1);
                             }}
                           >
