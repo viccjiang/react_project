@@ -5,11 +5,6 @@ import { useReducer } from "react";
 export default function Bmi() {
   const [inputValues, setInputValues] = useReducer(
     (state, newState) => {
-      console.log("state");
-      console.log(state);
-      console.log("newState");
-      console.log(newState);
-
       return { ...state, ...newState };
     },
     { height: "", weight: "" }

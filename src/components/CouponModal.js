@@ -85,7 +85,7 @@ function CouponModal({ closeModal, getCoupons, type, tempCoupon }) {
           due_date: date.getTime(),
         }, // 依照 api 格式送出，所以包在 data 裡面
       });
-      console.log(res);
+
       // 送出submit後，執行以下
       handleSuccessMessage(dispatch, res); // 顯示成功訊息
       // 關閉彈窗
@@ -93,7 +93,6 @@ function CouponModal({ closeModal, getCoupons, type, tempCoupon }) {
       // 關閉彈窗後執行，此函式為由外面 props 傳進來的函式，取得所有產品資料
       getCoupons();
     } catch (error) {
-      console.log(error);
       handleErrorMessage(dispatch, error); // 顯示錯誤訊息
     }
   };

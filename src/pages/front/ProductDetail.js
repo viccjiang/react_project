@@ -53,13 +53,15 @@ function ProductDetail() {
 
   return (
     <div className="full-height">
-      <div
-        style={{
-          minHeight: "300px",
-          backgroundImage: `url(${product.imageUrl})`,
-          backgroundPosition: "center center",
-        }}
-      ></div>
+      {product.imageUrl && (
+        <div
+          style={{
+            minHeight: "300px",
+            backgroundImage: `url(${product.imageUrl})`,
+            backgroundPosition: "center center",
+          }}
+        ></div>
+      )}
       <div className="container">
         <div className="row justify-content-between mt-4 mb-7">
           <div className="col-md-7">
@@ -88,6 +90,7 @@ function ProductDetail() {
             <p className="fw-bold">NT$ {product.price}</p>
             <p>{product.content}</p>
             <div className="input-group mb-3 border rounded-pill mt-3">
+              {/* 加號 */}
               <div className="input-group-prepend">
                 <button
                   className="btn btn-outline-dark border-0 py-3 rounded-start-pill product-detail-hover"
@@ -100,6 +103,7 @@ function ProductDetail() {
                   <i className="bi bi-dash"></i>
                 </button>
               </div>
+              {/* 數量 */}
               <input
                 type="number"
                 className="form-control border-0 text-center my-auto shadow-none"
@@ -109,6 +113,7 @@ function ProductDetail() {
                 readOnly
                 value={cartQuantity}
               />
+              {/* 減號 */}
               <div className="input-group-append">
                 <button
                   className="btn btn-outline-dark border-0 py-3 rounded-end-circle product-detail-hover"

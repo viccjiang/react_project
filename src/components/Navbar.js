@@ -103,12 +103,6 @@ function Navbar({ cartData }) {
                     購物車
                   </NavLink>
                 </li>
-
-                {/* <li className="nav-item active">
-                  <NavLink className="nav-link ps-0" to="/coach">
-                    健身教練
-                  </NavLink>
-                </li> */}
               </ul>
             </div>
             <div className="d-flex">

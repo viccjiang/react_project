@@ -16,7 +16,6 @@ function FrontLayout() {
       const res = await axios.get(
         `/v2/api/${process.env.REACT_APP_API_PATH}/cart`
       );
-      console.log("購物車: ", res.data.data);
       setCartData(res.data.data);
     } catch (error) {
       console.log(error);
@@ -32,9 +31,9 @@ function FrontLayout() {
     <>
       {/* 訊息提示 */}
       <MessageToast></MessageToast>
-      {/* header */}
+      {/* Navbar 傳入購物車資料 */}
       <Navbar cartData={cartData}></Navbar>
-      {/* 巢狀 */}
+      {/* 巢狀路由用 Outlet，建議用大括號物件形式傳 */}
       <Outlet context={{ getCart, cartData, isLoading }}></Outlet>
       {/* link */}
       <div className="bg-black">

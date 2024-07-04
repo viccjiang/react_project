@@ -10,7 +10,6 @@ function Success() {
     const res = await axios.get(
       `/v2/api/${process.env.REACT_APP_API_PATH}/order/${orderId}`
     );
-    console.log(res);
     setOrderData(res.data.order);
   };
 

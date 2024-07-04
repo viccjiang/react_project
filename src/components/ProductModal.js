@@ -104,7 +104,6 @@ function ProductModal({ closeProductModal, getProducts, type, tempProduct }) {
       const res = await axios[method](api, {
         data: tempData, // 依照 api 格式送出，所以包在 data 裡面
       });
-      console.log(res);
 
       // 觸發訊息提示，觸發 messageStore.js 的 POST_MESSAGE
       handleSuccessMessage(dispatch, res);
@@ -115,8 +114,6 @@ function ProductModal({ closeProductModal, getProducts, type, tempProduct }) {
       // 關閉彈窗後執行，此函式為由外面 props 傳進來的函式，取得所有產品資料
       getProducts();
     } catch (error) {
-      console.log(error);
-
       // 觸發訊息提示，觸發 messageStore.js 的 POST_MESSAGE
       handleErrorMessage(dispatch, error);
     }
@@ -124,7 +121,6 @@ function ProductModal({ closeProductModal, getProducts, type, tempProduct }) {
 
   // 上傳圖片/檔案
   const uploadFile = async (file) => {
-    console.log(file);
     if (!file) return;
 
     // FormData 物件
@@ -137,7 +133,6 @@ function ProductModal({ closeProductModal, getProducts, type, tempProduct }) {
         `/v2/api/${process.env.REACT_APP_API_PATH}/admin/upload`,
         formData
       );
-      console.log(res);
       if (res.data.success) {
         setTempData({
           ...tempData,
