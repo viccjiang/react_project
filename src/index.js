@@ -21,6 +21,7 @@ import { HashRouter } from "react-router-dom";
 
 // axios 預設設定，發請求時不用再寫完整的 url
 import axios from "axios";
+// 打 api 時可以省略 REACT_APP_API_URL
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
